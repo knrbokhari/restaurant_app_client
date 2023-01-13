@@ -20,6 +20,38 @@ const dashboard = {
             url: '/dashboard/default',
             icon: icons.DashboardOutlined,
             breadcrumbs: false
+        },
+        {
+            id: 'products',
+            title: 'Products',
+            type: 'item',
+            url: '/dashboard/products',
+            icon: icons.DashboardOutlined,
+            breadcrumbs: false
+        },
+        {
+            id: 'orders',
+            title: 'Total Orders',
+            type: 'item',
+            url: '/dashboard/orders',
+            icon: icons.DashboardOutlined,
+            breadcrumbs: false
+        },
+        {
+            id: 'users',
+            title: 'Total Users',
+            type: 'item',
+            url: '/dashboard/users',
+            icon: icons.DashboardOutlined,
+            breadcrumbs: false
+        },
+        {
+            id: 'sales',
+            title: 'Total Sales',
+            type: 'item',
+            url: '/dashboard/sales',
+            icon: icons.DashboardOutlined,
+            breadcrumbs: false
         }
     ]
 };
