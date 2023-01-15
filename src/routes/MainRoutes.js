@@ -23,37 +23,29 @@ const MainRoutes = {
     element: <MainLayout />,
     children: [
         {
-            path: '/',
+            path: 'dashboard',
             element: <DashboardDefault />
-        },
-        {
-            path: 'color',
-            element: <Color />
         },
         {
             path: 'dashboard',
             children: [
                 {
-                    path: 'default',
-                    element: <DashboardDefault />
+                    path: 'products',
+                    element: <Shadow />
+                },
+                {
+                    path: 'orders',
+                    element: <Typography />
+                },
+                {
+                    path: 'users',
+                    element: <AntIcons />
+                },
+                {
+                    path: 'sales',
+                    element: <Color />
                 }
             ]
-        },
-        {
-            path: 'sample-page',
-            element: <SamplePage />
-        },
-        {
-            path: 'shadow',
-            element: <Shadow />
-        },
-        {
-            path: 'typography',
-            element: <Typography />
-        },
-        {
-            path: 'icons/ant',
-            element: <AntIcons />
         }
     ]
 };

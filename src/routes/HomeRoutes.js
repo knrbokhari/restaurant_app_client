@@ -10,11 +10,19 @@ const HomeRoute = {
     element: <HomeLayout />,
     children: [
         {
-            path: 'home',
+            path: '/',
             element: <SamplePage />
         },
         {
-            path: 'register',
+            path: 'menu',
+            element: <SamplePage />
+        },
+        {
+            path: 'blog',
+            element: <SamplePage />
+        },
+        {
+            path: 'contact',
             element: <SamplePage />
         }
     ]

@@ -1,9 +1,13 @@
 // assets
-import { DashboardOutlined } from '@ant-design/icons';
+import { DashboardOutlined, FileProtectOutlined, ShopOutlined, TeamOutlined, CoffeeOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
-    DashboardOutlined
+    DashboardOutlined,
+    FileProtectOutlined,
+    ShopOutlined,
+    TeamOutlined,
+    CoffeeOutlined
 };
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
@@ -26,31 +30,31 @@ const dashboard = {
             title: 'Products',
             type: 'item',
             url: '/dashboard/products',
-            icon: icons.DashboardOutlined,
+            icon: icons.ShopOutlined,
             breadcrumbs: false
         },
         {
             id: 'orders',
-            title: 'Total Orders',
+            title: 'Orders',
             type: 'item',
             url: '/dashboard/orders',
-            icon: icons.DashboardOutlined,
+            icon: icons.CoffeeOutlined,
             breadcrumbs: false
         },
         {
             id: 'users',
-            title: 'Total Users',
+            title: 'Users',
             type: 'item',
             url: '/dashboard/users',
-            icon: icons.DashboardOutlined,
+            icon: icons.TeamOutlined,
             breadcrumbs: false
         },
         {
             id: 'sales',
-            title: 'Total Sales',
+            title: 'Sales',
             type: 'item',
             url: '/dashboard/sales',
-            icon: icons.DashboardOutlined,
+            icon: icons.FileProtectOutlined,
             breadcrumbs: false
         }
     ]

@@ -10,6 +10,8 @@ import HeaderContent from './HeaderContent';
 
 // assets
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import Logo from 'components/Logo/Logo';
+import { Link } from 'react-router-dom';
 
 // ==============================|| MAIN LAYOUT - HEADER ||============================== //
 
@@ -24,7 +26,9 @@ const Header = ({ open, handleDrawerToggle, HomeHeader }) => {
     const mainHeader = (
         <Toolbar sx={{ backgroundColor: 'secondary.dark' }}>
             {HomeHeader ? (
-                ''
+                <Link to="/">
+                    <Logo />
+                </Link>
             ) : (
                 <IconButton
                     disableRipple

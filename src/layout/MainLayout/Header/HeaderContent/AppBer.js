@@ -1,33 +1,39 @@
-import React from 'react';
-import { Toolbar, Box, Button, Link } from '@mui/material';
-// import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Toolbar, List, ListItem } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const AppBer = () => {
+    const [location, setLocation] = useState(window.location.pathname);
+
     const navItems = [
         { url: '/', name: 'Home' },
         { url: '/menu', name: 'Menu' },
         { url: '/blog', name: 'Blog' },
         { url: '/contact', name: 'Contact' }
     ];
+
+    console.log(window.location.pathname);
+
     return (
         <>
             <Toolbar>
-                <Box sx={{ display: { xs: 'flex' } }}>
+                <List sx={{ display: { xs: 'flex' } }}>
                     {navItems.map((i) => (
-                        <Button
-                            key={i}
-                            component={Link}
-                            href={i.url}
-                            sx={{
-                                color: `${window.location.pathname === `${i.url}` ? 'warning.main' : '#fff'}`,
-                                '&:hover': { color: 'warning.main', backgroundColor: 'transparent' },
-                                backgroundColor: 'transparent'
-                            }}
-                        >
-                            {i.name}
-                        </Button>
+                        <Link key={i} to={i.url} style={{ textDecoration: 'none' }}>
+                            <ListItem
+                                key={i}
+                                onClick={() => setLocation(window.location.pathname)}
+                                sx={{
+                                    color: `${window.location.pathname === `${i.url}` ? 'warning.main' : '#fff'}`,
+                                    '&:hover': { color: 'warning.main', backgroundColor: 'transparent' },
+                                    backgroundColor: 'transparent'
+                                }}
+                            >
+                                {i.name}
+                            </ListItem>
+                        </Link>
                     ))}
-                </Box>
+                </List>
             </Toolbar>
         </>
     );
