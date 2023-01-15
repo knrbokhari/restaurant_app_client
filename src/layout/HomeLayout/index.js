@@ -20,7 +20,7 @@ const MainLayout = () => {
     return (
         <Box sx={{ display: 'flex', width: '100%' }}>
             <Header HomeHeader={true} />
-            <Box component="main" sx={{ width: '100%', flexGrow: 1, p: { xs: 2, sm: 3 } }}>
+            <Box component="main" sx={{ width: '100%' }}>
                 <Toolbar />
                 <Breadcrumbs navigation={navigation} title titleBottom card={false} divider={false} />
                 <Outlet />
