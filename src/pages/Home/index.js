@@ -1,4 +1,4 @@
-import HomeCarousel from 'components/HomeCarousel';
+import HomeCarousel from 'components/Home/HomeCarousel';
 import React from 'react';
 
 const HomePage = () => {

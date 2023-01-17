@@ -12,14 +12,12 @@ const AppBer = () => {
         { url: '/contact', name: 'Contact' }
     ];
 
-    console.log(window.location.pathname);
-
     return (
         <>
             <Toolbar>
                 <List sx={{ display: { xs: 'flex' } }}>
                     {navItems.map((i) => (
-                        <Link key={i} to={i.url} style={{ textDecoration: 'none' }}>
+                        <Link key={i.url} to={i.url} style={{ textDecoration: 'none' }}>
                             <ListItem
                                 key={i}
                                 onClick={() => setLocation(window.location.pathname)}
