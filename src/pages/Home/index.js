@@ -1,3 +1,4 @@
+import BookATable from 'components/Home/BookATable';
 import HomeCarousel from 'components/Home/HomeCarousel';
 import LocationAndTime from 'components/Home/LocationAndTime';
 import OurMenu from 'components/Home/OurMenu';
@@ -13,6 +14,7 @@ const HomePage = () => {
             <Wellcome />
             <Services />
             <OurMenu />
+            <BookATable />
         </>
     );
 };

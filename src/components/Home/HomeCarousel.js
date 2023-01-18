@@ -24,7 +24,7 @@ const overlay = {
     opacity: '.11'
 };
 
-const CustomButtonOne = styled(Button)({
+export const CustomButtonOne = styled(Button)({
     boxShadow: 'none',
     textTransform: 'none',
     fontSize: 20,
