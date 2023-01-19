@@ -14,7 +14,7 @@ const contentStyle = {
     backgroundSize: 'cover'
 };
 
-const overlay = {
+export const overlay = {
     position: 'absolute',
     top: 0,
     bottom: 0,
