@@ -5,6 +5,7 @@ import HomeLayout from 'layout/HomeLayout/index';
 // render Pages
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
 const HomePage = Loadable(lazy(() => import('pages/Home/index')));
+const OurMenu = Loadable(lazy(() => import('pages/OurMenu')));
 
 const HomeRoute = {
     path: '/',
@@ -16,7 +17,7 @@ const HomeRoute = {
         },
         {
             path: 'menu',
-            element: <SamplePage />
+            element: <OurMenu />
         },
         {
             path: 'blog',
