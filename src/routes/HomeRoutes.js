@@ -6,6 +6,7 @@ import HomeLayout from 'layout/HomeLayout/index';
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
 const HomePage = Loadable(lazy(() => import('pages/Home/index')));
 const OurMenu = Loadable(lazy(() => import('pages/OurMenu')));
+const Contact = Loadable(lazy(() => import('pages/Contact')));
 
 const HomeRoute = {
     path: '/',
@@ -25,7 +26,7 @@ const HomeRoute = {
         },
         {
             path: 'contact',
-            element: <SamplePage />
+            element: <Contact />
         }
     ]
 };
