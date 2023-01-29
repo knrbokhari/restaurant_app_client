@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import axios from '../../../axios';
 
 // material-ui
 import {
@@ -44,7 +45,12 @@ const AuthRegister = () => {
     };
 
     const registerUaer = (data) => {
-        console.log(data);
+        // console.log(data);
+        axios
+            .post('/users/register')
+            .then((req) => console.log(req))
+            .then((res) => console.log(res))
+            .catch((e) => console.log(e));
     };
 
     const changePassword = (value) => {
