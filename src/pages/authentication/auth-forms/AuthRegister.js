@@ -35,49 +35,49 @@ import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
 const AuthRegister = () => {
     const [level, setLevel] = useState();
-    const [showPassword, setShowPassword] = useState(false);
-    const handleClickShowPassword = () => {
-        setShowPassword(!showPassword);
+    const [showpassword, setShowpassword] = useState(false);
+    const handleClickShowpassword = () => {
+        setShowpassword(!showpassword);
     };
 
-    const handleMouseDownPassword = (event) => {
+    const handleMouseDownpassword = (event) => {
         event.preventDefault();
     };
 
-    const registerUaer = (data) => {
+    const registerUaer = async (data) => {
         // console.log(data);
-        axios
-            .post('/users/register')
+        await axios
+            .post('/api/v1/users/register', { body: data })
             .then((req) => console.log(req))
             .then((res) => console.log(res))
             .catch((e) => console.log(e));
     };
 
-    const changePassword = (value) => {
+    const changepassword = (value) => {
         const temp = strengthIndicator(value);
         setLevel(strengthColor(temp));
     };
 
     useEffect(() => {
-        changePassword('');
+        changepassword('');
     }, []);
 
     return (
         <>
             <Formik
                 initialValues={{
-                    firstname: '',
-                    lastname: '',
+                    first_name: '',
+                    last_name: '',
                     email: '',
                     role: 'user',
                     password: '',
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
-                    firstname: Yup.string().max(255).required('First Name is required'),
-                    lastname: Yup.string().max(255).required('Last Name is required'),
-                    email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-                    password: Yup.string().max(255).required('Password is required')
+                    first_name: Yup.string().max(255).required('First Name is required'),
+                    last_name: Yup.string().max(255).required('Last Name is required'),
+                    email: Yup.string().email('Must be a valid email').max(255).required('email is required'),
+                    password: Yup.string().max(255).required('password is required')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
@@ -97,43 +97,43 @@ const AuthRegister = () => {
                         <Grid container spacing={3}>
                             <Grid item xs={12} md={6}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="firstname-signup">First Name*</InputLabel>
+                                    <InputLabel htmlFor="first_name-signup">First Name*</InputLabel>
                                     <OutlinedInput
-                                        id="firstname-login"
-                                        type="firstname"
-                                        value={values.firstname}
-                                        name="firstname"
+                                        id="first_name-login"
+                                        type="first_name"
+                                        value={values.first_name}
+                                        name="first_name"
                                         onBlur={handleBlur}
                                         onChange={handleChange}
                                         placeholder="John"
                                         fullWidth
-                                        error={Boolean(touched.firstname && errors.firstname)}
+                                        error={Boolean(touched.first_name && errors.first_name)}
                                     />
-                                    {touched.firstname && errors.firstname && (
-                                        <FormHelperText error id="helper-text-firstname-signup">
-                                            {errors.firstname}
+                                    {touched.first_name && errors.first_name && (
+                                        <FormHelperText error id="helper-text-first_name-signup">
+                                            {errors.first_name}
                                         </FormHelperText>
                                     )}
                                 </Stack>
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="lastname-signup">Last Name*</InputLabel>
+                                    <InputLabel htmlFor="last_name-signup">Last Name*</InputLabel>
                                     <OutlinedInput
                                         fullWidth
-                                        error={Boolean(touched.lastname && errors.lastname)}
-                                        id="lastname-signup"
-                                        type="lastname"
-                                        value={values.lastname}
-                                        name="lastname"
+                                        error={Boolean(touched.last_name && errors.last_name)}
+                                        id="last_name-signup"
+                                        type="last_name"
+                                        value={values.last_name}
+                                        name="last_name"
                                         onBlur={handleBlur}
                                         onChange={handleChange}
                                         placeholder="Doe"
                                         inputProps={{}}
                                     />
-                                    {touched.lastname && errors.lastname && (
-                                        <FormHelperText error id="helper-text-lastname-signup">
-                                            {errors.lastname}
+                                    {touched.last_name && errors.last_name && (
+                                        <FormHelperText error id="helper-text-last_name-signup">
+                                            {errors.last_name}
                                         </FormHelperText>
                                     )}
                                 </Stack>
@@ -161,7 +161,7 @@ const AuthRegister = () => {
                             </Grid> */}
                             <Grid item xs={12}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="email-signup">Email Address*</InputLabel>
+                                    <InputLabel htmlFor="email-signup">email Address*</InputLabel>
                                     <OutlinedInput
                                         fullWidth
                                         error={Boolean(touched.email && errors.email)}
@@ -183,29 +183,29 @@ const AuthRegister = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Stack spacing={1}>
-                                    <InputLabel htmlFor="password-signup">Password</InputLabel>
+                                    <InputLabel htmlFor="password-signup">password</InputLabel>
                                     <OutlinedInput
                                         fullWidth
                                         error={Boolean(touched.password && errors.password)}
                                         id="password-signup"
-                                        type={showPassword ? 'text' : 'password'}
+                                        type={showpassword ? 'text' : 'password'}
                                         value={values.password}
                                         name="password"
                                         onBlur={handleBlur}
                                         onChange={(e) => {
                                             handleChange(e);
-                                            changePassword(e.target.value);
+                                            changepassword(e.target.value);
                                         }}
                                         endAdornment={
                                             <InputAdornment position="end">
                                                 <IconButton
                                                     aria-label="toggle password visibility"
-                                                    onClick={handleClickShowPassword}
-                                                    onMouseDown={handleMouseDownPassword}
+                                                    onClick={handleClickShowpassword}
+                                                    onMouseDown={handleMouseDownpassword}
                                                     edge="end"
                                                     size="large"
                                                 >
-                                                    {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                                                    {showpassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                                                 </IconButton>
                                             </InputAdornment>
                                         }
