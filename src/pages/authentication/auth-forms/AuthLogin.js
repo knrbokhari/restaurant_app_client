@@ -18,6 +18,7 @@ import {
     Stack,
     Typography
 } from '@mui/material';
+import { Modal } from 'antd';
 
 // third party
 import * as Yup from 'yup';
@@ -34,6 +35,7 @@ import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
 const AuthLogin = () => {
     const [checked, setChecked] = React.useState(false);
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
 
     const [showPassword, setShowPassword] = React.useState(false);
     const handleClickShowPassword = () => {
@@ -47,8 +49,29 @@ const AuthLogin = () => {
             .catch((e) => console.log(e));
     };
 
+    const forgotPassword = async (data) => {
+        console.log(data);
+        await axios
+            .post('/api/v1/users/forgot', data)
+            .then((res) => console.log(res))
+            .catch((e) => console.log(e));
+        handleOk();
+    };
+
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
+    };
+
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
     };
 
     return (
@@ -147,7 +170,7 @@ const AuthLogin = () => {
                                         }
                                         label={<Typography variant="h6">Keep me sign in</Typography>}
                                     />
-                                    <Link variant="h6" component={RouterLink} to="" color="text.primary">
+                                    <Link variant="h6" onClick={showModal} color="text.primary">
                                         Forgot Password?
                                     </Link>
                                 </Stack>
@@ -184,6 +207,70 @@ const AuthLogin = () => {
                     </form>
                 )}
             </Formik>
+            <Modal title="Forgot Password?" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null}>
+                <Formik
+                    initialValues={{
+                        email: ''
+                    }}
+                    validationSchema={Yup.object().shape({
+                        email: Yup.string().email('Must be a valid email').max(255).required('Email is required')
+                    })}
+                    onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
+                        try {
+                            setStatus({ success: false });
+                            setSubmitting(false);
+                            forgotPassword(values);
+                        } catch (err) {
+                            setStatus({ success: false });
+                            setErrors({ submit: err.message });
+                            setSubmitting(false);
+                        }
+                    }}
+                >
+                    {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
+                        <form noValidate onSubmit={handleSubmit}>
+                            <Grid container spacing={3}>
+                                <Grid item xs={12}>
+                                    <Stack spacing={1}>
+                                        <InputLabel htmlFor="email-login">Email Address</InputLabel>
+                                        <OutlinedInput
+                                            id="email-login"
+                                            type="email"
+                                            value={values.email}
+                                            name="email"
+                                            onBlur={handleBlur}
+                                            onChange={handleChange}
+                                            placeholder="Enter email address"
+                                            fullWidth
+                                            error={Boolean(touched.email && errors.email)}
+                                        />
+                                        {touched.email && errors.email && (
+                                            <FormHelperText error id="standard-weight-helper-text-email-login">
+                                                {errors.email}
+                                            </FormHelperText>
+                                        )}
+                                    </Stack>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <AnimateButton>
+                                        <Button
+                                            disableElevation
+                                            disabled={isSubmitting}
+                                            fullWidth
+                                            size="large"
+                                            type="submit"
+                                            variant="contained"
+                                            color="primary"
+                                        >
+                                            Send
+                                        </Button>
+                                    </AnimateButton>
+                                </Grid>
+                            </Grid>
+                        </form>
+                    )}
+                </Formik>
+            </Modal>
         </>
     );
 };

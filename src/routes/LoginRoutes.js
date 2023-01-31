@@ -8,6 +8,7 @@ import MinimalLayout from 'layout/MinimalLayout';
 const AuthLogin = Loadable(lazy(() => import('pages/authentication/Login')));
 const AuthRegister = Loadable(lazy(() => import('pages/authentication/Register')));
 const VerifyUser = Loadable(lazy(() => import('pages/authentication/VerifyUser')));
+const ForgotPassword = Loadable(lazy(() => import('pages/authentication/ForgotPassword')));
 
 // ==============================|| AUTH ROUTING ||============================== //
 
@@ -26,6 +27,10 @@ const LoginRoutes = {
         {
             path: 'verify/:token',
             element: <VerifyUser />
+        },
+        {
+            path: 'reset/:token',
+            element: <ForgotPassword />
         }
     ]
 };
