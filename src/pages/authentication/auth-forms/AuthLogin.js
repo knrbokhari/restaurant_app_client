@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import axios from '../../../axios';
 
 // material-ui
 import {
@@ -39,6 +40,13 @@ const AuthLogin = () => {
         setShowPassword(!showPassword);
     };
 
+    const loginUser = async (data) => {
+        await axios
+            .post('/api/v1/users/login', data)
+            .then((res) => console.log(res))
+            .catch((e) => console.log(e));
+    };
+
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
@@ -47,9 +55,8 @@ const AuthLogin = () => {
         <>
             <Formik
                 initialValues={{
-                    email: 'info@codedthemes.com',
-                    password: '123456',
-                    submit: null
+                    email: '',
+                    password: ''
                 }}
                 validationSchema={Yup.object().shape({
                     email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
@@ -59,6 +66,7 @@ const AuthLogin = () => {
                     try {
                         setStatus({ success: false });
                         setSubmitting(false);
+                        loginUser(values);
                     } catch (err) {
                         setStatus({ success: false });
                         setErrors({ submit: err.message });

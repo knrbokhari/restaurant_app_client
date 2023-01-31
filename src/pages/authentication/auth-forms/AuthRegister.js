@@ -44,11 +44,10 @@ const AuthRegister = () => {
         event.preventDefault();
     };
 
-    const registerUaer = async (data) => {
+    const registerUser = async (data) => {
         // console.log(data);
         await axios
-            .post('/api/v1/users/register', { body: data })
-            .then((req) => console.log(req))
+            .post('/api/v1/users/register', data)
             .then((res) => console.log(res))
             .catch((e) => console.log(e));
     };
@@ -70,8 +69,8 @@ const AuthRegister = () => {
                     last_name: '',
                     email: '',
                     role: 'user',
-                    password: '',
-                    submit: null
+                    password: ''
+                    // submit: null
                 }}
                 validationSchema={Yup.object().shape({
                     first_name: Yup.string().max(255).required('First Name is required'),
@@ -83,7 +82,7 @@ const AuthRegister = () => {
                     try {
                         setStatus({ success: false });
                         setSubmitting(false);
-                        registerUaer(values);
+                        registerUser(values);
                     } catch (err) {
                         console.error(err);
                         setStatus({ success: false });
