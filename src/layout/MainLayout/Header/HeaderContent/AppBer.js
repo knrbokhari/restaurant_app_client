@@ -1,38 +1,48 @@
-import React, { useState } from 'react';
-import { Toolbar, List, ListItem } from '@mui/material';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Box, List, ListItem, ListItemText, ListItemButton } from '@mui/material';
+import { Link, NavLink } from 'react-router-dom';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import NavBarItem from 'components/NavBarItem';
 
 const AppBer = () => {
-    const [location, setLocation] = useState(window.location.pathname);
-
-    const navItems = [
-        { url: '/', name: 'Home' },
-        { url: '/menu', name: 'Menu' },
-        { url: '/blog', name: 'Blog' },
-        { url: '/contact', name: 'Contact' }
+    const nav = [
+        {
+            id: '',
+            title: 'Home',
+            type: 'item',
+            url: '/',
+            breadcrumbs: false
+        },
+        {
+            id: 'menu',
+            title: 'Menu',
+            type: 'item',
+            url: '/menu',
+            breadcrumbs: false
+        },
+        {
+            id: 'blog',
+            title: 'Blog',
+            type: 'item',
+            url: '/blog',
+            breadcrumbs: false
+        },
+        {
+            id: 'contact',
+            title: 'Contact',
+            type: 'item',
+            url: 'contact',
+            breadcrumbs: false
+        }
     ];
 
     return (
         <>
-            <Toolbar>
-                <List sx={{ display: { xs: 'flex' } }}>
-                    {navItems.map((i) => (
-                        <Link key={i.url} to={i.url} style={{ textDecoration: 'none' }}>
-                            <ListItem
-                                key={i}
-                                onClick={() => setLocation(window.location.pathname)}
-                                sx={{
-                                    color: `${window.location.pathname === `${i.url}` ? 'warning.main' : '#fff'}`,
-                                    '&:hover': { color: 'warning.main', backgroundColor: 'transparent' },
-                                    backgroundColor: 'transparent'
-                                }}
-                            >
-                                {i.name}
-                            </ListItem>
-                        </Link>
-                    ))}
-                </List>
-            </Toolbar>
+            <Box sx={{ display: { sm: 'block', md: 'flex' } }}>
+                {nav.map((menuItem) => (
+                    <NavBarItem key={menuItem.id} item={menuItem} level={1} />
+                ))}
+            </Box>
         </>
     );
 };
