@@ -22,7 +22,7 @@ const MainLayout = () => {
             <Header HomeHeader={true} />
             <Box component="main" sx={{ width: '100%' }}>
                 <Toolbar />
-                {/* <Breadcrumbs navigation={navigation} title titleBottom card={false} divider={false} /> */}
+                <Breadcrumbs navigation={navigation} title titleBottom card={false} divider={false} />
                 <Outlet />
             </Box>
         </Box>

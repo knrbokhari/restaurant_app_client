@@ -11,6 +11,7 @@ import Transitions from 'components/@extended/Transitions';
 
 // assets
 import { MoreOutlined } from '@ant-design/icons';
+import NavBer from './NavBer';
 
 // ==============================|| HEADER CONTENT - MOBILE ||============================== //
 
@@ -85,6 +86,9 @@ const MobileSection = () => {
                         <Paper sx={{ boxShadow: theme.customShadows.z1 }}>
                             <ClickAwayListener onClickAway={handleClose}>
                                 <AppBar color="inherit">
+                                    <Toolbar sx={{ justifyContent: 'center' }}>
+                                        <NavBer />
+                                    </Toolbar>
                                     <Toolbar>
                                         <Search />
                                         <Profile />

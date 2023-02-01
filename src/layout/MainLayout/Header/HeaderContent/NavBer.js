@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Box, List, ListItem, ListItemText, ListItemButton } from '@mui/material';
-import { Link, NavLink } from 'react-router-dom';
-import ListItemIcon from '@mui/material/ListItemIcon';
+import React from 'react';
+import { Box } from '@mui/material';
 import NavBarItem from 'components/NavBarItem';
 
-const AppBer = () => {
+const NavBer = () => {
     const nav = [
         {
             id: '',
@@ -47,4 +45,4 @@ const AppBer = () => {
     );
 };
 
-export default AppBer;
+export default NavBer;

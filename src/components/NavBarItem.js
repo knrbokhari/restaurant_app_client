@@ -23,7 +23,13 @@ const NavBarItem = ({ item }) => {
 
     let listItemProps = {
         component: forwardRef((props, ref) => (
-            <Link ref={ref} {...props} to={item.url} target={itemTarget} style={{ marginRight: 10, display: 'block' }} />
+            <Link
+                ref={ref}
+                {...props}
+                to={item.url}
+                target={itemTarget}
+                style={{ marginRight: 10, display: 'block', textAlign: 'center' }}
+            />
         ))
     };
     if (item?.external) {

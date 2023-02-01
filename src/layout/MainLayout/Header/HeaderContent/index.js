@@ -7,7 +7,7 @@ import Search from './Search';
 import Profile from './Profile';
 import Notification from './Notification';
 import MobileSection from './MobileSection';
-import AppBer from './AppBer';
+import NavBer from './NavBer';
 
 // ==============================|| HEADER - CONTENT ||============================== //
 
@@ -32,7 +32,7 @@ const HeaderContent = () => {
             </IconButton> */}
 
             {/* <Notification /> */}
-            <AppBer />
+            {!matchesXs && <NavBer />}
             {!matchesXs && <Profile />}
             {matchesXs && <MobileSection />}
         </>
