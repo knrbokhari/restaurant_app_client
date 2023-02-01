@@ -108,15 +108,7 @@ const HomeCarousel = () => {
                     <Box style={contentStyle}>
                         <Box>
                             <Box style={overlay}></Box>
-                            <Grid
-                                container
-                                spacing={2}
-                                height={750}
-                                justifyContent="center"
-                                alignItems="center"
-                                alignContent="center"
-                                mt={3}
-                            >
+                            <Grid container spacing={2} height={750} justifyContent="center" alignItems="center" alignContent="center">
                                 <Grid item xs={12} md={6} zIndex={1}>
                                     <Box
                                         sx={{
@@ -160,7 +152,6 @@ const HomeCarousel = () => {
                                 height={750}
                                 justifyContent="center"
                                 alignItems="center"
-                                mt={3}
                                 alignContent="center"
                                 sx={{ flexDirection: 'row-reverse' }}
                             >
@@ -208,15 +199,7 @@ const HomeCarousel = () => {
                     <Box style={contentStyle}>
                         <Box>
                             <Box style={overlay}></Box>
-                            <Grid
-                                container
-                                spacing={2}
-                                height={750}
-                                justifyContent="center"
-                                alignItems="center"
-                                alignContent="center"
-                                mt={3}
-                            >
+                            <Grid container spacing={2} height={750} justifyContent="center" alignItems="center" alignContent="center">
                                 <Grid item xs={12} md={6} zIndex={1}>
                                     <Box
                                         sx={{
@@ -254,7 +237,7 @@ const HomeCarousel = () => {
                     <Box style={contentStyle}>
                         <Box>
                             <Box style={overlay}></Box>
-                            <Grid container spacing={2} height={750} justifyContent="center" alignItems="center" mt={3}>
+                            <Grid container spacing={2} height={750} justifyContent="center" alignItems="center">
                                 <Grid item xs={12} md={6} zIndex={1}>
                                     {/* <Box> */}
                                     <Typography variant="h1" color="#fff" mb={3} style={{ textAlign: 'center' }}>

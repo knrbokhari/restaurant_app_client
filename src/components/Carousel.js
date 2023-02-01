@@ -8,8 +8,7 @@ const contentStyle = {
     backgroundImage: 'url(https://i.ibb.co/Qc9Fmsm/bg1.webp)',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    marginTop: '25px'
+    backgroundSize: 'cover'
 };
 
 const AllCarousel = () => {
