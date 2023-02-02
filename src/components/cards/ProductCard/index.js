@@ -4,71 +4,58 @@ import { Box, Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, T
 import { styled } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 
-const index = ({ expand }) => {
-    const [expanded, setExpanded] = React.useState(false);
+const textStyle = {
+    wordWrap: 'normal',
+    color: 'black',
+    fontWeight: 700,
+    maxWidth: '100%',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap'
+};
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
-
+const index = () => {
     return (
         <>
-            <Box container>
-                <Card sx={{ maxWidth: 500 }}>
-                    <CardHeader
-                        avatar={
-                            // <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                            'R'
-                            // </Avatar>
-                        }
-                        // action={
-                        //     <IconButton aria-label="settings">
-                        //         <MoreVertIcon />
-                        //     </IconButton>
-                        // }
-                        title="Shrimp and Chorizo Paella"
-                        subheader="September 14, 2016"
+            <Card sx={{ width: '100%' }}>
+                <CardContent style={{ padding: 10 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Typography style={textStyle}>Cafe Sreemangal & Chinese</Typography>
+                        <Typography>0/5(0)</Typography>
+                    </Box>
+                </CardContent>
+                <Box
+                    sx={{
+                        position: 'relative',
+                        width: '100%',
+                        height: '200px',
+                        // margin: '10px',
+                        overflow: 'hidden',
+                        transition: 'all .2s linear'
+                    }}
+                >
+                    <CardMedia
+                        sx={{
+                            width: '100%',
+                            transition: 'all .2s linear',
+                            ':hover': {
+                                transform: 'scale(1.1)'
+                            }
+                        }}
+                        component="img"
+                        height="200"
+                        image="https://mui.com/static/images/cards/paella.jpg"
+                        alt="Paella dish"
                     />
-                    <CardMedia component="img" height="194" image="https://mui.com/static/images/cards/paella.jpg" alt="Paella dish" />
-                    <CardContent>
-                        <Typography variant="body2" color="text.secondary">
-                            This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of
-                            frozen peas along with the mussels, if you like.
-                        </Typography>
-                    </CardContent>
-                    <CardActions disableSpacing>
-                        <Typography mr="auto">20$</Typography>
-                        <button>Order Now</button>
-                        {expand && (
-                            <button expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
-                                Expand More
-                            </button>
-                        )}
-                    </CardActions>
-                    <Collapse in={expanded} timeout="auto" unmountOnExit>
-                        <CardContent>
-                            <Typography paragraph>Method:</Typography>
-                            <Typography paragraph>
-                                Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10 minutes.
-                            </Typography>
-                            <Typography paragraph>
-                                Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high heat. Add chicken,
-                                shrimp and chorizo, and cook, stirring occasionally until lightly browned, 6 to 8 minutes. Transfer shrimp
-                                to a large plate and set aside, leaving chicken and chorizo in the pan. Add pimentón, bay leaves, garlic,
-                                tomatoes, onion, salt and pepper, and cook, stirring often until thickened and fragrant, about 10 minutes.
-                                Add saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-                            </Typography>
-                            <Typography paragraph>
-                                Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook without stirring,
-                                until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat to medium-low, add reserved shrimp and
-                                mussels, tucking them down into the rice, and cook again without stirring, until mussels have opened and
-                                rice is just tender, 5 to 7 minutes more. (Discard any mussels that don&apos;t open.)
-                            </Typography>
-                            <Typography>Set aside off of the heat to let rest for 10 minutes, and then serve.</Typography>
-                        </CardContent>
-                    </Collapse>
-                </Card>
-            </Box>
+                </Box>
+
+                <CardContent style={{ padding: 10 }}>
+                    <Typography sx={{ fontWeight: 600 }}>
+                        Price: <del>$200</del> <span>$150</span>
+                    </Typography>
+                    <button>Add to Cart</button>
+                </CardContent>
+            </Card>
         </>
     );
 };
