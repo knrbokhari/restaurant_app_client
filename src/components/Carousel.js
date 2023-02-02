@@ -16,7 +16,7 @@ const AllCarousel = () => {
         <>
             <Box style={contentStyle}>
                 <Box>
-                    <Box style={overlay}></Box>
+                    <Box style={overlay} sx={{ height: 600 }}></Box>
                     <Box display="flex" height={550} justifyContent="center" alignItems="center">
                         <Typography variant="h1" component="h2" color="#fff">
                             OUR MENU
