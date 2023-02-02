@@ -1,9 +1,10 @@
 import React from 'react';
 import { Carousel } from 'antd';
-import second from '../../image/bg1.webp';
 import { Box, Grid, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
+import { useDispatch } from 'react-redux';
+import { activeItem } from 'store/reducers/menu';
 
 const contentStyle = {
     display: 'block',
@@ -101,6 +102,12 @@ const CustomButtonTwo = styled(Button)({
 });
 
 const HomeCarousel = () => {
+    const dispatch = useDispatch();
+
+    const itemHandler = (id) => {
+        dispatch(activeItem({ openItem: [id] }));
+    };
+
     return (
         <>
             <Carousel autoplay>
@@ -134,7 +141,7 @@ const HomeCarousel = () => {
                                             <CustomButtonOne>Order Now</CustomButtonOne>
                                         </Link>
                                         <Link to="menu">
-                                            <CustomButtonTwo>See Menu</CustomButtonTwo>
+                                            <CustomButtonTwo onClick={() => itemHandler('menu')}>See Menu</CustomButtonTwo>
                                         </Link>
                                     </Box>
                                 </Grid>
@@ -187,7 +194,7 @@ const HomeCarousel = () => {
                                             <CustomButtonOne>Order Now</CustomButtonOne>
                                         </Link>
                                         <Link to="menu">
-                                            <CustomButtonTwo>See Menu</CustomButtonTwo>
+                                            <CustomButtonTwo onClick={() => itemHandler('menu')}>See Menu</CustomButtonTwo>
                                         </Link>
                                     </Box>
                                 </Grid>
@@ -225,7 +232,7 @@ const HomeCarousel = () => {
                                             <CustomButtonOne>Order Now</CustomButtonOne>
                                         </Link>
                                         <Link to="menu">
-                                            <CustomButtonTwo>See Menu</CustomButtonTwo>
+                                            <CustomButtonTwo onClick={() => itemHandler('menu')}>See Menu</CustomButtonTwo>
                                         </Link>
                                     </Box>
                                 </Grid>
@@ -251,7 +258,7 @@ const HomeCarousel = () => {
                                             <CustomButtonOne>Order Now</CustomButtonOne>
                                         </Link>
                                         <Link to="menu">
-                                            <CustomButtonTwo>See Menu</CustomButtonTwo>
+                                            <CustomButtonTwo onClick={() => itemHandler('menu')}>See Menu</CustomButtonTwo>
                                         </Link>
                                     </Box>
                                     {/* </Box> */}
