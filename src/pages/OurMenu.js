@@ -2,6 +2,7 @@ import AllCarousel from 'components/Carousel';
 import React from 'react';
 import { Box, Grid, Typography, Stack, Pagination, Container } from '@mui/material';
 import ProductCard from '../components/cards/ProductCard/index';
+import Footer from 'components/Home/Footer';
 
 const OurMenu = () => {
     let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -36,10 +37,11 @@ const OurMenu = () => {
                         </Grid>
                     ))}
                 </Grid>
-                <Stack spacing={2} mb={10}>
+                <Stack spacing={2} mb={5} style={{ alignItems: 'center' }}>
                     <Pagination count={10} />
                 </Stack>
             </Container>
+            <Footer />
         </>
     );
 };

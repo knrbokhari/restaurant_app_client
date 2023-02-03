@@ -63,7 +63,7 @@ export const CustomButtonOne = styled(Button)({
     }
 });
 
-const CustomButtonTwo = styled(Button)({
+export const CustomButtonTwo = styled(Button)({
     boxShadow: 'none',
     textTransform: 'none',
     fontSize: 20,
