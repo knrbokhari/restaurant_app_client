@@ -16,6 +16,7 @@ import {
     Container
 } from '@mui/material';
 import { useParams } from 'react-router';
+import DescriptionAndReview from 'components/Product/DescriptionAndReview';
 
 const Product = () => {
     const { id } = useParams();
@@ -103,6 +104,7 @@ const Product = () => {
                         <Button>Add to cart</Button>
                     </Grid>
                 </Grid>
+                <DescriptionAndReview />
             </Container>
         </Box>
     );
