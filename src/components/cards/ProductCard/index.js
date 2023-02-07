@@ -64,7 +64,7 @@ const index = ({ url }) => {
                 </Typography>
                 <CardContent style={{ padding: 10 }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Link to="/">
+                        <Link to="/menu/1">
                             <Typography style={textStyle} onclick={() => navigator('/')}>
                                 Cafe Sreemangal & Chinese
                             </Typography>
