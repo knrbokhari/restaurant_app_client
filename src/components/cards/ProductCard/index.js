@@ -4,6 +4,7 @@ import { Box, Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, T
 import { styled } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import { CustomButtonTwo } from 'components/Home/HomeCarousel';
+import { Link } from 'react-router-dom';
 
 const textStyle = {
     wordWrap: 'normal',
@@ -15,16 +16,16 @@ const textStyle = {
     whiteSpace: 'nowrap'
 };
 
-const index = () => {
+const index = ({ url }) => {
     return (
         <>
             <Card sx={{ width: '100%', position: 'relative' }}>
-                <CardContent style={{ padding: 10 }}>
+                {/* <CardContent style={{ padding: 10 }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Typography style={textStyle}>Cafe Sreemangal & Chinese</Typography>
                         <Typography>0/5(0)</Typography>
                     </Box>
-                </CardContent>
+                </CardContent> */}
                 <Box
                     sx={{
                         position: 'relative',
@@ -62,6 +63,15 @@ const index = () => {
                     10% OFF
                 </Typography>
                 <CardContent style={{ padding: 10 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Link to="/">
+                            <Typography style={textStyle} onclick={() => navigator('/')}>
+                                Cafe Sreemangal & Chinese
+                            </Typography>
+                        </Link>
+                        <Typography>0/5(0)</Typography>
+                    </Box>
+                    <Typography>category:</Typography>
                     <Typography sx={{ fontWeight: 700 }} mb={2}>
                         Price: <del>$200</del> <span> $150</span>
                     </Typography>

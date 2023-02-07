@@ -33,7 +33,7 @@ const OurMenu = () => {
                 <Grid container spacing={2} zIndex={10} px={5} pb={7}>
                     {arr.map((i) => (
                         <Grid item xs={12} sm={6} md={3} display="flex" flexDirection="column" alignItems="center">
-                            <ProductCard key={i} expand={false} />
+                            <ProductCard key={i} url={`menu/${i}`} />
                         </Grid>
                     ))}
                 </Grid>
