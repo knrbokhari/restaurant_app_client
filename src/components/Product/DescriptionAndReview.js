@@ -4,11 +4,9 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import { Box, Grid } from '@mui/material';
 import Review from './Review';
-import ProductCard from '../cards/ProductCard/index';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-    const arr = [1, 2, 3, 4];
 
     return (
         <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>

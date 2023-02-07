@@ -17,9 +17,12 @@ import {
 } from '@mui/material';
 import { useParams } from 'react-router';
 import DescriptionAndReview from 'components/Product/DescriptionAndReview';
+import ProductCard from '../../components/cards/ProductCard/index';
 
 const Product = () => {
     const { id } = useParams();
+    const arr = [1, 2, 3, 4];
+
     return (
         <Box mt="50px">
             <Container>
@@ -105,6 +108,13 @@ const Product = () => {
                     </Grid>
                 </Grid>
                 <DescriptionAndReview />
+                <Grid container spacing={3}>
+                    {arr.map((i) => (
+                        <Grid item xs={12} sm={6} md={3} display="flex" flexDirection="column" alignItems="center">
+                            <ProductCard key={i} url={`menu/${i}`} />
+                        </Grid>
+                    ))}
+                </Grid>
             </Container>
         </Box>
     );
