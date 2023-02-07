@@ -7,6 +7,7 @@ const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
 const HomePage = Loadable(lazy(() => import('pages/Home/index')));
 const OurMenu = Loadable(lazy(() => import('pages/OurMenu')));
 const Contact = Loadable(lazy(() => import('pages/Contact')));
+const Product = Loadable(lazy(() => import('pages/product/Product')));
 
 const HomeRoute = {
     path: '/',
@@ -19,6 +20,10 @@ const HomeRoute = {
         {
             path: 'menu',
             element: <OurMenu />
+        },
+        {
+            path: 'menu/:id',
+            element: <Product />
         },
         {
             path: 'blog',
