@@ -18,6 +18,7 @@ import {
 import { useParams } from 'react-router';
 import DescriptionAndReview from 'components/Product/DescriptionAndReview';
 import ProductCard from '../../components/cards/ProductCard/index';
+import Footer from 'components/Home/Footer';
 
 const Product = () => {
     const { id } = useParams();
@@ -116,6 +117,7 @@ const Product = () => {
                     ))}
                 </Grid>
             </Container>
+            <Footer />
         </Box>
     );
 };
