@@ -8,6 +8,7 @@ import Profile from './Profile';
 import Notification from './Notification';
 import MobileSection from './MobileSection';
 import NavBer from './NavBer';
+import Cart from './Cart';
 
 // ==============================|| HEADER - CONTENT ||============================== //
 
@@ -18,21 +19,9 @@ const HeaderContent = () => {
         <>
             {!matchesXs && <Search />}
             {matchesXs && <Box sx={{ width: '100%', ml: 1 }} />}
-
-            {/* <IconButton
-                component={Link}
-                href="https://github.com/codedthemes/mantis-free-react-admin-template"
-                target="_blank"
-                disableRipple
-                color="secondary"
-                title="Download Free Version"
-                sx={{ color: 'text.primary', bgcolor: 'grey.100' }}
-            >
-                <GithubOutlined />
-            </IconButton> */}
-
-            {/* <Notification /> */}
             {!matchesXs && <NavBer />}
+            <Cart />
+            {/* <Notification /> */}
             {!matchesXs && <Profile />}
             {matchesXs && <MobileSection />}
         </>
