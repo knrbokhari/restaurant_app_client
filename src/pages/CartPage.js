@@ -1,8 +1,7 @@
 import React from 'react';
-import { Box, Grid, Typography, Divider, Button, Container, IconButton } from '@mui/material';
-
-import { CloseOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { Grid, Typography, Container } from '@mui/material';
 import CartItems from 'components/Cart/CartItems';
+import CartSummary from 'components/Cart/CartSummary';
 
 const CartPage = () => {
     return (
@@ -17,7 +16,9 @@ const CartPage = () => {
                     <CartItems />
                     <CartItems />
                 </Grid>
-                <Grid item xs={12} sm={6}></Grid>
+                <Grid item xs={12} sm={6}>
+                    <CartSummary />
+                </Grid>
             </Grid>
         </Container>
     );
