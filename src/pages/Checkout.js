@@ -11,9 +11,11 @@ const Checkout = () => {
                 <Typography mt={5} mb={5} fontSize={30} align="center">
                     You're almost there..!
                 </Typography>
+                <Typography mb={2} fontSize={20} align="center">
+                    Complete Your purchase by providing your payment details.
+                </Typography>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
-                        <Typography>Complete Your purchase by providing your payment details.</Typography>
                         <CheckoutInfo />
                     </Grid>
                     <Grid item xs={12} sm={6}>

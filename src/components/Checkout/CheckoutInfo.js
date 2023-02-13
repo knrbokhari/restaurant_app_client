@@ -1,5 +1,19 @@
 import React from 'react';
-import { Button, FormHelperText, Grid, InputLabel, OutlinedInput, Stack, Typography, Paper } from '@mui/material';
+import {
+    Button,
+    FormHelperText,
+    Grid,
+    InputLabel,
+    OutlinedInput,
+    Stack,
+    Typography,
+    Paper,
+    FormLabel,
+    Radio,
+    RadioGroup,
+    FormControlLabel,
+    FormControl
+} from '@mui/material';
 
 // third party
 import * as Yup from 'yup';
@@ -15,13 +29,15 @@ const CheckoutInfo = () => {
                     email: '',
                     name: '',
                     number: '',
-                    adderss: ''
+                    adderss: '',
+                    payment_Methods: ''
                 }}
                 validationSchema={Yup.object().shape({
                     email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
                     name: Yup.string().max(255).required('Name is required'),
                     number: Yup.string().max(255).required('Number is required'),
-                    adderss: Yup.string().max(255).required('Adderss is required')
+                    adderss: Yup.string().max(255).required('Adderss is required'),
+                    payment_Methods: Yup.string().oneOf(['Credit Card', 'PayPal']).required('Payment Methods is required')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
@@ -62,7 +78,6 @@ const CheckoutInfo = () => {
                                     )}
                                 </Stack>
                             </Grid>
-
                             <Grid item xs={12}>
                                 <Stack spacing={1}>
                                     <InputLabel htmlFor="email-login">Email Address</InputLabel>
@@ -84,7 +99,6 @@ const CheckoutInfo = () => {
                                     )}
                                 </Stack>
                             </Grid>
-
                             <Grid item xs={12}>
                                 <Stack spacing={1}>
                                     <InputLabel htmlFor="number-login">Your Number</InputLabel>
@@ -106,7 +120,6 @@ const CheckoutInfo = () => {
                                     )}
                                 </Stack>
                             </Grid>
-
                             <Grid item xs={12}>
                                 <Stack spacing={1}>
                                     <InputLabel htmlFor="adderss-login">Your Address</InputLabel>
@@ -126,6 +139,29 @@ const CheckoutInfo = () => {
                                             {errors.adderss}
                                         </FormHelperText>
                                     )}
+                                </Stack>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Stack spacing={1}>
+                                    <Typography>Step 1 of 2</Typography>
+                                    <Typography>Payment Information</Typography>
+                                    <FormControl component="fieldset">
+                                        <FormLabel component="legend">Payment Method</FormLabel>
+                                        <RadioGroup
+                                            row
+                                            aria-label="Payment Method"
+                                            name="payment_Methods"
+                                            value={values.payment_Methods}
+                                            onChange={handleChange}
+                                        >
+                                            <FormControlLabel value="Credit Card" control={<Radio />} label="Credit Card" />
+                                            <FormControlLabel value="PayPal" control={<Radio />} label="Paypal" />
+                                            <FormControlLabel value="PayPal" control={<Radio />} label="Paypal" />
+                                        </RadioGroup>
+                                        {touched.payment_Methods && errors.payment_Methods && (
+                                            <FormHelperText error>{errors.payment_Methods}</FormHelperText>
+                                        )}
+                                    </FormControl>
                                 </Stack>
                             </Grid>
 
