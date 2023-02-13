@@ -16,12 +16,17 @@ import {
 } from '@mui/material';
 
 // third party
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 import AnimateButton from 'components/@extended/AnimateButton';
+import StripeCheckoutForm from './StripeCheckoutForm';
 
 const CheckoutInfo = () => {
+    const stripePromise = loadStripe('pk_test_your_stripe_public_key');
+
     return (
         <Paper variant="outlined" sx={{ padding: '30px' }}>
             <Formik
@@ -37,7 +42,9 @@ const CheckoutInfo = () => {
                     name: Yup.string().max(255).required('Name is required'),
                     number: Yup.string().max(255).required('Number is required'),
                     adderss: Yup.string().max(255).required('Adderss is required'),
-                    payment_Methods: Yup.string().oneOf(['Credit Card', 'PayPal']).required('Payment Methods is required')
+                    payment_Methods: Yup.string()
+                        .oneOf(['Credit Card', 'PayPal', 'Cash on Delivery'])
+                        .required('Payment Methods is required')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
@@ -145,24 +152,30 @@ const CheckoutInfo = () => {
                                 <Stack spacing={1}>
                                     <Typography>Step 1 of 2</Typography>
                                     <Typography>Payment Information</Typography>
-                                    <FormControl component="fieldset">
-                                        <FormLabel component="legend">Payment Method</FormLabel>
-                                        <RadioGroup
-                                            row
-                                            aria-label="Payment Method"
-                                            name="payment_Methods"
-                                            value={values.payment_Methods}
-                                            onChange={handleChange}
-                                        >
-                                            <FormControlLabel value="Credit Card" control={<Radio />} label="Credit Card" />
-                                            <FormControlLabel value="PayPal" control={<Radio />} label="Paypal" />
-                                            <FormControlLabel value="PayPal" control={<Radio />} label="Paypal" />
-                                        </RadioGroup>
-                                        {touched.payment_Methods && errors.payment_Methods && (
-                                            <FormHelperText error>{errors.payment_Methods}</FormHelperText>
-                                        )}
-                                    </FormControl>
+                                    <FormLabel component="legend">Payment Method</FormLabel>
+                                    <RadioGroup
+                                        row
+                                        aria-label="Payment Method"
+                                        name="payment_Methods"
+                                        value={values.payment_Methods}
+                                        onChange={handleChange}
+                                    >
+                                        <FormControlLabel value="Credit Card" control={<Radio />} label="Credit Card" />
+                                        <FormControlLabel value="PayPal" control={<Radio />} label="Paypal" />
+                                        <FormControlLabel value="Cash on Delivery" control={<Radio />} label="Cash on Delivery" />
+                                    </RadioGroup>
+                                    {touched.payment_Methods && errors.payment_Methods && (
+                                        <FormHelperText error>{errors.payment_Methods}</FormHelperText>
+                                    )}
                                 </Stack>
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                {values.payment_Methods === 'Credit Card' && (
+                                    <Elements stripe={stripePromise}>
+                                        <StripeCheckoutForm />
+                                    </Elements>
+                                )}
                             </Grid>
 
                             <Grid item xs={12}>
