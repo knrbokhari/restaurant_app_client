@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Typography, Container } from '@mui/material';
 import CartItems from 'components/Cart/CartItems';
 import CartSummary from 'components/Cart/CartSummary';
+import Footer from 'components/Home/Footer';
 
 const CartPage = () => {
     return (
@@ -20,6 +21,7 @@ const CartPage = () => {
                     <CartSummary />
                 </Grid>
             </Grid>
+            <Footer />
         </Container>
     );
 };
