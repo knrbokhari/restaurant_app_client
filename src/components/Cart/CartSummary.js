@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Grid, Typography, Divider, Paper, Container, Button } from '@mui/material';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const CartSummary = () => {
     return (
@@ -23,6 +24,7 @@ const CartSummary = () => {
                     <Typography sx={{ fontSize: '20px' }}>$110.00</Typography>
                 </Box>
                 <Divider />
+                <ReCAPTCHA sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" />
                 <Button fullWidth sx={{ margin: '10px 0', fontSize: '17px' }}>
                     Checkout Now
                 </Button>
