@@ -2,16 +2,20 @@ import React from 'react';
 import { Grid, Typography, Container } from '@mui/material';
 import Footer from 'components/Home/Footer';
 import CheckoutSummary from 'components/Checkout/CheckoutSummary';
+import CheckoutInfo from 'components/Checkout/CheckoutInfo';
 
 const Checkout = () => {
     return (
         <>
             <Container>
-                <Typography mt={5} mb={5} align="center">
+                <Typography mt={5} mb={5} fontSize={30} align="center">
                     You're almost there..!
                 </Typography>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}></Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Typography>Complete Your purchase by providing your payment details.</Typography>
+                        <CheckoutInfo />
+                    </Grid>
                     <Grid item xs={12} sm={6}>
                         <CheckoutSummary />
                     </Grid>
