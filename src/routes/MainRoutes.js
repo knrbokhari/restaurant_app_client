@@ -16,6 +16,7 @@ const Color = Loadable(lazy(() => import('pages/components-overview/Color')));
 const Shadow = Loadable(lazy(() => import('pages/components-overview/Shadow')));
 const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons')));
 const DProductPage = Loadable(lazy(() => import('pages/dashboard/product/DProductPage')));
+const AddProduct = Loadable(lazy(() => import('pages/dashboard/product/AddProduct')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -33,6 +34,10 @@ const MainRoutes = {
                 {
                     path: 'products',
                     element: <DProductPage />
+                },
+                {
+                    path: 'products/create',
+                    element: <AddProduct />
                 },
                 {
                     path: 'orders',
