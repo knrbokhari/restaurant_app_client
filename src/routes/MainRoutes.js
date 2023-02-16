@@ -17,6 +17,7 @@ const Shadow = Loadable(lazy(() => import('pages/components-overview/Shadow')));
 const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons')));
 const DProductPage = Loadable(lazy(() => import('pages/dashboard/product/DProductPage')));
 const AddProduct = Loadable(lazy(() => import('pages/dashboard/product/AddProduct')));
+const DUsers = Loadable(lazy(() => import('pages/dashboard/DUsers')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -45,7 +46,7 @@ const MainRoutes = {
                 },
                 {
                     path: 'users',
-                    element: <AntIcons />
+                    element: <DUsers />
                 },
                 {
                     path: 'sales',
