@@ -18,6 +18,7 @@ const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons'
 const DProductPage = Loadable(lazy(() => import('pages/dashboard/product/DProductPage')));
 const AddProduct = Loadable(lazy(() => import('pages/dashboard/product/AddProduct')));
 const DUsers = Loadable(lazy(() => import('pages/dashboard/DUsers')));
+const DOrder = Loadable(lazy(() => import('pages/dashboard/DOrder')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -42,7 +43,7 @@ const MainRoutes = {
                 },
                 {
                     path: 'orders',
-                    element: <Typography />
+                    element: <DOrder />
                 },
                 {
                     path: 'users',
