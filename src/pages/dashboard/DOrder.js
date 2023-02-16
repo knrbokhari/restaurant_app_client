@@ -221,7 +221,7 @@ const products = [
     { id: 20, name: 'Roxie', price: 200, discount: 65, size: 'Normal', reviews: 65, stock_out: 65, time: 30 }
 ];
 
-const DProductPsize = () => {
+const DOrder = () => {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [selected, setSelected] = React.useState([]);
@@ -381,4 +381,4 @@ const DProductPsize = () => {
     );
 };
 
-export default DUsers;
+export default DOrder;
