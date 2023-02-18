@@ -19,6 +19,7 @@ const DProductPage = Loadable(lazy(() => import('pages/dashboard/product/DProduc
 const AddProduct = Loadable(lazy(() => import('pages/dashboard/product/AddProduct')));
 const DUsers = Loadable(lazy(() => import('pages/dashboard/DUsers')));
 const DOrder = Loadable(lazy(() => import('pages/dashboard/DOrder')));
+const DSales = Loadable(lazy(() => import('pages/dashboard/sales/DSales')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -51,7 +52,7 @@ const MainRoutes = {
                 },
                 {
                     path: 'sales',
-                    element: <Color />
+                    element: <DSales />
                 }
             ]
         }

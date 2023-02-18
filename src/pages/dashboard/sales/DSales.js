@@ -58,43 +58,31 @@ const headCells = [
         id: 'name',
         numeric: false,
         disablePadding: true,
-        label: 'User name'
+        label: 'Product name'
     },
     {
-        id: 'email',
+        id: 'sales',
         numeric: true,
         disablePadding: false,
-        label: 'Email'
+        label: 'Total Sales'
     },
     {
-        id: 'role',
+        id: 'stock',
         numeric: true,
         disablePadding: false,
-        label: 'Role'
+        label: 'Stock'
     },
     {
-        id: 'cart',
+        id: 'rating',
         numeric: true,
         disablePadding: false,
-        label: 'Cart'
-    },
-    {
-        id: 'Orders',
-        numeric: true,
-        disablePadding: false,
-        label: 'Orders'
+        label: 'Rating'
     },
     {
         id: 'reviews',
         numeric: true,
         disablePadding: false,
         label: 'Reviews'
-    },
-    {
-        id: 'button',
-        numeric: true,
-        disablePadding: false,
-        label: 'Action'
     }
 ];
 
@@ -172,7 +160,7 @@ const EnhancedTableToolbar = (props) => {
                 </Typography>
             ) : (
                 <Typography sx={{ flex: '1 1 100%' }} variant="h6" id="tableTitle" component="div">
-                    All Users
+                    All Sales
                 </Typography>
             )}
 
@@ -200,29 +188,29 @@ EnhancedTableToolbar.propTypes = {
 };
 
 const products = [
-    { id: 1, name: 'Snow', email: 200, role: 35, size: 'Normal', reviews: 35, Orders: 35, cart: 30 },
-    { id: 2, name: 'Lannister', email: 200, role: 42, size: 'Normal', reviews: 42, Orders: 42, cart: 30 },
-    { id: 3, name: 'Lannister', email: 200, role: 45, size: 'Normal', reviews: 45, Orders: 45, cart: 30 },
-    { id: 4, name: 'Stark', email: 200, role: 16, size: 'Normal', reviews: 16, Orders: 16, cart: 30 },
-    { id: 5, name: 'Targaryen', email: 200, role: null, reviews: null, Orders: null, cart: 30 },
-    { id: 6, name: 'Melisandre', email: 200, role: 150, size: 'Normal', reviews: 150, Orders: 150, cart: 30 },
-    { id: 7, name: 'Clifford', email: 200, role: 44, size: 'Normal', reviews: 44, Orders: 44, cart: 30 },
-    { id: 8, name: 'Frances', email: 200, role: 36, size: 'Normal', reviews: 36, Orders: 36, cart: 30 },
-    { id: 9, name: 'Roxie', email: 200, role: 65, size: 'Normal', reviews: 65, Orders: 65, cart: 30 },
-    { id: 10, name: 'Snow', email: 200, role: 35, size: 'Normal', reviews: 35, Orders: 35, cart: 30 },
-    { id: 11, name: 'Lannister', email: 200, role: 42, size: 'Normal', reviews: 42, Orders: 42, cart: 30 },
-    { id: 12, name: 'Lannister', email: 200, role: 45, size: 'Normal', reviews: 45, Orders: 45, cart: 30 },
-    { id: 13, name: 'Stark', email: 200, role: 16, size: 'Normal', reviews: 16, Orders: 16, cart: 30 },
-    { id: 14, name: 'Targaryen', email: 200, role: null, reviews: null, Orders: null, cart: 30 },
-    { id: 15, name: 'Melisandre', email: 200, role: 150, size: 'Normal', reviews: 150, Orders: 150, cart: 30 },
-    { id: 16, name: 'Clifford', email: 200, role: 44, size: 'Normal', reviews: 44, Orders: 44, cart: 30 },
-    { id: 17, name: 'Frances', email: 200, role: 36, size: 'Normal', reviews: 36, Orders: 36, cart: 30 },
-    { id: 18, name: 'Frances', email: 200, role: 36, size: 'Normal', reviews: 36, Orders: 36, cart: 30 },
-    { id: 19, name: 'Roxie', email: 200, role: 65, size: 'Normal', reviews: 65, Orders: 65, cart: 30 },
-    { id: 20, name: 'Roxie', email: 200, role: 65, size: 'Normal', reviews: 65, Orders: 65, cart: 30 }
+    { id: 1, name: 'Snow', sales: 200, stock: 35, size: 'Normal', reviews: 35, Orders: 35, rating: 30 },
+    { id: 2, name: 'Lannister', sales: 200, stock: 42, size: 'Normal', reviews: 42, Orders: 42, rating: 30 },
+    { id: 3, name: 'Lannister', sales: 200, stock: 45, size: 'Normal', reviews: 45, Orders: 45, rating: 30 },
+    { id: 4, name: 'Stark', sales: 200, stock: 16, size: 'Normal', reviews: 16, Orders: 16, rating: 30 },
+    { id: 5, name: 'Targaryen', sales: 200, stock: null, reviews: null, Orders: null, rating: 30 },
+    { id: 6, name: 'Melisandre', sales: 200, stock: 150, size: 'Normal', reviews: 150, Orders: 150, rating: 30 },
+    { id: 7, name: 'Clifford', sales: 200, stock: 44, size: 'Normal', reviews: 44, Orders: 44, rating: 30 },
+    { id: 8, name: 'Frances', sales: 200, stock: 36, size: 'Normal', reviews: 36, Orders: 36, rating: 30 },
+    { id: 9, name: 'Roxie', sales: 200, stock: 65, size: 'Normal', reviews: 65, Orders: 65, rating: 30 },
+    { id: 10, name: 'Snow', sales: 200, stock: 35, size: 'Normal', reviews: 35, Orders: 35, rating: 30 },
+    { id: 11, name: 'Lannister', sales: 200, stock: 42, size: 'Normal', reviews: 42, Orders: 42, rating: 30 },
+    { id: 12, name: 'Lannister', sales: 200, stock: 45, size: 'Normal', reviews: 45, Orders: 45, rating: 30 },
+    { id: 13, name: 'Stark', sales: 200, stock: 16, size: 'Normal', reviews: 16, Orders: 16, rating: 30 },
+    { id: 14, name: 'Targaryen', sales: 200, stock: null, reviews: null, Orders: null, rating: 30 },
+    { id: 15, name: 'Melisandre', sales: 200, stock: 150, size: 'Normal', reviews: 150, Orders: 150, rating: 30 },
+    { id: 16, name: 'Clifford', sales: 200, stock: 44, size: 'Normal', reviews: 44, Orders: 44, rating: 30 },
+    { id: 17, name: 'Frances', sales: 200, stock: 36, size: 'Normal', reviews: 36, Orders: 36, rating: 30 },
+    { id: 18, name: 'Frances', sales: 200, stock: 36, size: 'Normal', reviews: 36, Orders: 36, rating: 30 },
+    { id: 19, name: 'Roxie', sales: 200, stock: 65, size: 'Normal', reviews: 65, Orders: 65, rating: 30 },
+    { id: 20, name: 'Roxie', sales: 200, stock: 65, size: 'Normal', reviews: 65, Orders: 65, rating: 30 }
 ];
 
-const DUsers = () => {
+const DSales = () => {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [selected, setSelected] = React.useState([]);
@@ -316,7 +304,7 @@ const DUsers = () => {
                                         <TableRow
                                             hover
                                             onClick={(event) => handleClick(event, row?.name)}
-                                            role="checkbox"
+                                            stock="checkbox"
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
                                             key={row?.name}
@@ -334,39 +322,10 @@ const DUsers = () => {
                                             <TableCell component="th" id={labelId} scope="row" padding="none">
                                                 {row?.name}
                                             </TableCell>
-                                            <TableCell align="right">${row?.email}</TableCell>
-                                            <TableCell align="right">{row?.role}%</TableCell>
-                                            <TableCell align="right">{row?.cart} Min</TableCell>
-                                            <TableCell align="right">{row?.Orders}</TableCell>
+                                            <TableCell align="right">${row?.sales}</TableCell>
+                                            <TableCell align="right">{row?.stock}%</TableCell>
+                                            <TableCell align="right">{row?.rating} Min</TableCell>
                                             <TableCell align="right">{row?.reviews}</TableCell>
-                                            <TableCell align="right">
-                                                <Stack direction="row" spacing={1}>
-                                                    <IconButton
-                                                        aria-label="view"
-                                                        // onClick={() => setViewProduct(row)}
-                                                    >
-                                                        see
-                                                        {/* <VisibilityIcon onClick={handleOpen} /> */}
-                                                    </IconButton>
-                                                    <IconButton
-                                                        aria-label="edit"
-                                                        color="primary"
-                                                        // onClick={() => handleEditProduct(row?._id)}
-                                                    >
-                                                        edi
-                                                        {/* <EditIcon /> */}
-                                                    </IconButton>
-
-                                                    <IconButton
-                                                        sx={{ color: 'red' }}
-                                                        aria-label="delete"
-                                                        // onClick={() => setDelectProduct(row)}
-                                                    >
-                                                        del
-                                                        {/* <DeleteIcon onClick={handleOpenDelectModal} /> */}
-                                                    </IconButton>
-                                                </Stack>
-                                            </TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -396,4 +355,4 @@ const DUsers = () => {
     );
 };
 
-export default DUsers;
+export default DSales;
