@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Autocomplete,
     Box,
@@ -20,12 +20,15 @@ import {
     TextField,
     Toolbar,
     Tooltip,
-    Typography
+    Typography,
+    MenuItem
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import { visuallyHidden } from '@mui/utils';
 import { alpha } from '@mui/material/styles';
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
+import SalesColumnChart from '../SalesColumnChart';
+import MainCard from 'components/MainCard';
 
 const descendingComparator = (a, b, orderBy) => {
     if (b[orderBy] < a[orderBy]) {
@@ -210,7 +213,25 @@ const products = [
     { id: 20, name: 'Roxie', sales: 200, stock: 65, size: 'Normal', reviews: 65, Orders: 65, rating: 30 }
 ];
 
+// sales report status
+const status = [
+    {
+        value: 'today',
+        label: 'Today'
+    },
+    {
+        value: 'month',
+        label: 'This Month'
+    },
+    {
+        value: 'year',
+        label: 'This Year'
+    }
+];
+
 const DSales = () => {
+    const [value, setValue] = useState('today');
+    const [slot, setSlot] = useState('week');
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [selected, setSelected] = React.useState([]);
@@ -269,16 +290,48 @@ const DSales = () => {
         <Box>
             <Grid container rowSpacing={4.5} columnSpacing={2.75}>
                 <Grid item xs={12} sx={{ mb: -2.25 }}>
-                    <Typography variant="h5">User Details</Typography>
+                    <Typography variant="h5">Sales Details</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <AnalyticEcommerce title="Total Users" count="4,42,236" extra="35,000" />
+                    <AnalyticEcommerce title="Total Sales" count="4,42,236" extra="35,000" />
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <AnalyticEcommerce title="Active Users" count="78,250" extra="8,900" />
+                    <AnalyticEcommerce title="30 Days" count="78,250" extra="8,900" />
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <AnalyticEcommerce title="Worker" count="18,800" isLoss color="warning" extra="1,943" />
+                    <AnalyticEcommerce title="Last Year Sales" count="18,800" isLoss color="warning" extra="1,943" />
+                </Grid>
+                <Grid item xs={12} md={12} lg={12}>
+                    <Grid container alignItems="center" justifyContent="space-between">
+                        <Grid item>
+                            <Typography variant="h5">Sales Report</Typography>
+                        </Grid>
+                        <Grid item>
+                            <TextField
+                                id="standard-select-currency"
+                                size="small"
+                                select
+                                value={value}
+                                onChange={(e) => setValue(e.target.value)}
+                                sx={{ '& .MuiInputBase-input': { py: 0.5, fontSize: '0.875rem' } }}
+                            >
+                                {status.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                        </Grid>
+                    </Grid>
+                    <MainCard sx={{ mt: 1.75 }}>
+                        <Stack spacing={1.5} sx={{ mb: -12 }}>
+                            <Typography variant="h6" color="secondary">
+                                Net Profit
+                            </Typography>
+                            <Typography variant="h4">$1560</Typography>
+                        </Stack>
+                        <SalesColumnChart />
+                    </MainCard>
                 </Grid>
             </Grid>
             <Paper sx={{ width: '100%', mb: 2, mt: 3 }}>
