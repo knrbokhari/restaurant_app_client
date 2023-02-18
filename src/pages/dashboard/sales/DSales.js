@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Autocomplete,
     Box,
@@ -20,12 +20,15 @@ import {
     TextField,
     Toolbar,
     Tooltip,
-    Typography
+    Typography,
+    MenuItem
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import { visuallyHidden } from '@mui/utils';
 import { alpha } from '@mui/material/styles';
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
+import SalesColumnChart from '../SalesColumnChart';
+import MainCard from 'components/MainCard';
 
 const descendingComparator = (a, b, orderBy) => {
     if (b[orderBy] < a[orderBy]) {
@@ -58,43 +61,31 @@ const headCells = [
         id: 'name',
         numeric: false,
         disablePadding: true,
-        label: 'User name'
+        label: 'Product name'
     },
     {
-        id: 'email',
+        id: 'sales',
         numeric: true,
         disablePadding: false,
-        label: 'Email'
+        label: 'Total Sales'
     },
     {
-        id: 'role',
+        id: 'stock',
         numeric: true,
         disablePadding: false,
-        label: 'Role'
+        label: 'Stock'
     },
     {
-        id: 'cart',
+        id: 'rating',
         numeric: true,
         disablePadding: false,
-        label: 'Cart'
-    },
-    {
-        id: 'Orders',
-        numeric: true,
-        disablePadding: false,
-        label: 'Orders'
+        label: 'Rating'
     },
     {
         id: 'reviews',
         numeric: true,
         disablePadding: false,
         label: 'Reviews'
-    },
-    {
-        id: 'button',
-        numeric: true,
-        disablePadding: false,
-        label: 'Action'
     }
 ];
 
@@ -172,7 +163,7 @@ const EnhancedTableToolbar = (props) => {
                 </Typography>
             ) : (
                 <Typography sx={{ flex: '1 1 100%' }} variant="h6" id="tableTitle" component="div">
-                    All Users
+                    All Sales
                 </Typography>
             )}
 
@@ -200,29 +191,47 @@ EnhancedTableToolbar.propTypes = {
 };
 
 const products = [
-    { id: 1, name: 'Snow', email: 200, role: 35, size: 'Normal', reviews: 35, Orders: 35, cart: 30 },
-    { id: 2, name: 'Lannister', email: 200, role: 42, size: 'Normal', reviews: 42, Orders: 42, cart: 30 },
-    { id: 3, name: 'Lannister', email: 200, role: 45, size: 'Normal', reviews: 45, Orders: 45, cart: 30 },
-    { id: 4, name: 'Stark', email: 200, role: 16, size: 'Normal', reviews: 16, Orders: 16, cart: 30 },
-    { id: 5, name: 'Targaryen', email: 200, role: null, reviews: null, Orders: null, cart: 30 },
-    { id: 6, name: 'Melisandre', email: 200, role: 150, size: 'Normal', reviews: 150, Orders: 150, cart: 30 },
-    { id: 7, name: 'Clifford', email: 200, role: 44, size: 'Normal', reviews: 44, Orders: 44, cart: 30 },
-    { id: 8, name: 'Frances', email: 200, role: 36, size: 'Normal', reviews: 36, Orders: 36, cart: 30 },
-    { id: 9, name: 'Roxie', email: 200, role: 65, size: 'Normal', reviews: 65, Orders: 65, cart: 30 },
-    { id: 10, name: 'Snow', email: 200, role: 35, size: 'Normal', reviews: 35, Orders: 35, cart: 30 },
-    { id: 11, name: 'Lannister', email: 200, role: 42, size: 'Normal', reviews: 42, Orders: 42, cart: 30 },
-    { id: 12, name: 'Lannister', email: 200, role: 45, size: 'Normal', reviews: 45, Orders: 45, cart: 30 },
-    { id: 13, name: 'Stark', email: 200, role: 16, size: 'Normal', reviews: 16, Orders: 16, cart: 30 },
-    { id: 14, name: 'Targaryen', email: 200, role: null, reviews: null, Orders: null, cart: 30 },
-    { id: 15, name: 'Melisandre', email: 200, role: 150, size: 'Normal', reviews: 150, Orders: 150, cart: 30 },
-    { id: 16, name: 'Clifford', email: 200, role: 44, size: 'Normal', reviews: 44, Orders: 44, cart: 30 },
-    { id: 17, name: 'Frances', email: 200, role: 36, size: 'Normal', reviews: 36, Orders: 36, cart: 30 },
-    { id: 18, name: 'Frances', email: 200, role: 36, size: 'Normal', reviews: 36, Orders: 36, cart: 30 },
-    { id: 19, name: 'Roxie', email: 200, role: 65, size: 'Normal', reviews: 65, Orders: 65, cart: 30 },
-    { id: 20, name: 'Roxie', email: 200, role: 65, size: 'Normal', reviews: 65, Orders: 65, cart: 30 }
+    { id: 1, name: 'Snow', sales: 200, stock: 35, size: 'Normal', reviews: 35, Orders: 35, rating: 30 },
+    { id: 2, name: 'Lannister', sales: 200, stock: 42, size: 'Normal', reviews: 42, Orders: 42, rating: 30 },
+    { id: 3, name: 'Lannister', sales: 200, stock: 45, size: 'Normal', reviews: 45, Orders: 45, rating: 30 },
+    { id: 4, name: 'Stark', sales: 200, stock: 16, size: 'Normal', reviews: 16, Orders: 16, rating: 30 },
+    { id: 5, name: 'Targaryen', sales: 200, stock: null, reviews: null, Orders: null, rating: 30 },
+    { id: 6, name: 'Melisandre', sales: 200, stock: 150, size: 'Normal', reviews: 150, Orders: 150, rating: 30 },
+    { id: 7, name: 'Clifford', sales: 200, stock: 44, size: 'Normal', reviews: 44, Orders: 44, rating: 30 },
+    { id: 8, name: 'Frances', sales: 200, stock: 36, size: 'Normal', reviews: 36, Orders: 36, rating: 30 },
+    { id: 9, name: 'Roxie', sales: 200, stock: 65, size: 'Normal', reviews: 65, Orders: 65, rating: 30 },
+    { id: 10, name: 'Snow', sales: 200, stock: 35, size: 'Normal', reviews: 35, Orders: 35, rating: 30 },
+    { id: 11, name: 'Lannister', sales: 200, stock: 42, size: 'Normal', reviews: 42, Orders: 42, rating: 30 },
+    { id: 12, name: 'Lannister', sales: 200, stock: 45, size: 'Normal', reviews: 45, Orders: 45, rating: 30 },
+    { id: 13, name: 'Stark', sales: 200, stock: 16, size: 'Normal', reviews: 16, Orders: 16, rating: 30 },
+    { id: 14, name: 'Targaryen', sales: 200, stock: null, reviews: null, Orders: null, rating: 30 },
+    { id: 15, name: 'Melisandre', sales: 200, stock: 150, size: 'Normal', reviews: 150, Orders: 150, rating: 30 },
+    { id: 16, name: 'Clifford', sales: 200, stock: 44, size: 'Normal', reviews: 44, Orders: 44, rating: 30 },
+    { id: 17, name: 'Frances', sales: 200, stock: 36, size: 'Normal', reviews: 36, Orders: 36, rating: 30 },
+    { id: 18, name: 'Frances', sales: 200, stock: 36, size: 'Normal', reviews: 36, Orders: 36, rating: 30 },
+    { id: 19, name: 'Roxie', sales: 200, stock: 65, size: 'Normal', reviews: 65, Orders: 65, rating: 30 },
+    { id: 20, name: 'Roxie', sales: 200, stock: 65, size: 'Normal', reviews: 65, Orders: 65, rating: 30 }
 ];
 
-const DUsers = () => {
+// sales report status
+const status = [
+    {
+        value: 'today',
+        label: 'Today'
+    },
+    {
+        value: 'month',
+        label: 'This Month'
+    },
+    {
+        value: 'year',
+        label: 'This Year'
+    }
+];
+
+const DSales = () => {
+    const [value, setValue] = useState('today');
+    const [slot, setSlot] = useState('week');
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [selected, setSelected] = React.useState([]);
@@ -281,16 +290,48 @@ const DUsers = () => {
         <Box>
             <Grid container rowSpacing={4.5} columnSpacing={2.75}>
                 <Grid item xs={12} sx={{ mb: -2.25 }}>
-                    <Typography variant="h5">User Details</Typography>
+                    <Typography variant="h5">Sales Details</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <AnalyticEcommerce title="Total Users" count="4,42,236" extra="35,000" />
+                    <AnalyticEcommerce title="Total Sales" count="4,42,236" extra="35,000" />
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <AnalyticEcommerce title="Active Users" count="78,250" extra="8,900" />
+                    <AnalyticEcommerce title="30 Days" count="78,250" extra="8,900" />
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <AnalyticEcommerce title="Worker" count="18,800" isLoss color="warning" extra="1,943" />
+                    <AnalyticEcommerce title="Last Year Sales" count="18,800" isLoss color="warning" extra="1,943" />
+                </Grid>
+                <Grid item xs={12} md={12} lg={12}>
+                    <Grid container alignItems="center" justifyContent="space-between">
+                        <Grid item>
+                            <Typography variant="h5">Sales Report</Typography>
+                        </Grid>
+                        <Grid item>
+                            <TextField
+                                id="standard-select-currency"
+                                size="small"
+                                select
+                                value={value}
+                                onChange={(e) => setValue(e.target.value)}
+                                sx={{ '& .MuiInputBase-input': { py: 0.5, fontSize: '0.875rem' } }}
+                            >
+                                {status.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                        </Grid>
+                    </Grid>
+                    <MainCard sx={{ mt: 1.75 }}>
+                        <Stack spacing={1.5} sx={{ mb: -12 }}>
+                            <Typography variant="h6" color="secondary">
+                                Net Profit
+                            </Typography>
+                            <Typography variant="h4">$1560</Typography>
+                        </Stack>
+                        <SalesColumnChart />
+                    </MainCard>
                 </Grid>
             </Grid>
             <Paper sx={{ width: '100%', mb: 2, mt: 3 }}>
@@ -316,7 +357,7 @@ const DUsers = () => {
                                         <TableRow
                                             hover
                                             onClick={(event) => handleClick(event, row?.name)}
-                                            role="checkbox"
+                                            stock="checkbox"
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
                                             key={row?.name}
@@ -334,39 +375,10 @@ const DUsers = () => {
                                             <TableCell component="th" id={labelId} scope="row" padding="none">
                                                 {row?.name}
                                             </TableCell>
-                                            <TableCell align="right">${row?.email}</TableCell>
-                                            <TableCell align="right">{row?.role}%</TableCell>
-                                            <TableCell align="right">{row?.cart} Min</TableCell>
-                                            <TableCell align="right">{row?.Orders}</TableCell>
+                                            <TableCell align="right">${row?.sales}</TableCell>
+                                            <TableCell align="right">{row?.stock}%</TableCell>
+                                            <TableCell align="right">{row?.rating} Min</TableCell>
                                             <TableCell align="right">{row?.reviews}</TableCell>
-                                            <TableCell align="right">
-                                                <Stack direction="row" spacing={1}>
-                                                    <IconButton
-                                                        aria-label="view"
-                                                        // onClick={() => setViewProduct(row)}
-                                                    >
-                                                        see
-                                                        {/* <VisibilityIcon onClick={handleOpen} /> */}
-                                                    </IconButton>
-                                                    <IconButton
-                                                        aria-label="edit"
-                                                        color="primary"
-                                                        // onClick={() => handleEditProduct(row?._id)}
-                                                    >
-                                                        edi
-                                                        {/* <EditIcon /> */}
-                                                    </IconButton>
-
-                                                    <IconButton
-                                                        sx={{ color: 'red' }}
-                                                        aria-label="delete"
-                                                        // onClick={() => setDelectProduct(row)}
-                                                    >
-                                                        del
-                                                        {/* <DeleteIcon onClick={handleOpenDelectModal} /> */}
-                                                    </IconButton>
-                                                </Stack>
-                                            </TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -396,4 +408,4 @@ const DUsers = () => {
     );
 };
 
-export default DUsers;
+export default DSales;
