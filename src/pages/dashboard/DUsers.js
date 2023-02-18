@@ -25,6 +25,7 @@ import {
 import PropTypes from 'prop-types';
 import { visuallyHidden } from '@mui/utils';
 import { alpha } from '@mui/material/styles';
+import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
 
 const descendingComparator = (a, b, orderBy) => {
     if (b[orderBy] < a[orderBy]) {
@@ -57,31 +58,31 @@ const headCells = [
         id: 'name',
         numeric: false,
         disablePadding: true,
-        label: 'Product name'
+        label: 'User name'
     },
     {
-        id: 'price',
+        id: 'email',
         numeric: true,
         disablePadding: false,
-        label: 'Price'
+        label: 'Email'
     },
     {
-        id: 'discount',
+        id: 'role',
         numeric: true,
         disablePadding: false,
-        label: 'Discount'
+        label: 'Role'
     },
     {
-        id: 'time',
+        id: 'cart',
         numeric: true,
         disablePadding: false,
-        label: 'Time'
+        label: 'Cart'
     },
     {
-        id: 'stock_out',
+        id: 'Orders',
         numeric: true,
         disablePadding: false,
-        label: 'Stock_out'
+        label: 'Orders'
     },
     {
         id: 'reviews',
@@ -97,7 +98,7 @@ const headCells = [
     }
 ];
 
-const DUsers = () => {
+const EnhancedTableHead = (props) => {
     const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property);
@@ -171,7 +172,7 @@ const EnhancedTableToolbar = (props) => {
                 </Typography>
             ) : (
                 <Typography sx={{ flex: '1 1 100%' }} variant="h6" id="tableTitle" component="div">
-                    All Products
+                    All Users
                 </Typography>
             )}
 
@@ -199,29 +200,28 @@ EnhancedTableToolbar.propTypes = {
 };
 
 const products = [
-    { id: 1, name: 'Snow', price: 200, discount: 35, size: 'Normal', reviews: 35, stock_out: 35, time: 30 },
-    { id: 2, name: 'Lannister', price: 200, discount: 42, size: 'Normal', reviews: 42, stock_out: 42, time: 30 },
-    { id: 3, name: 'Lannister', price: 200, discount: 45, size: 'Normal', reviews: 45, stock_out: 45, time: 30 },
-    { id: 4, name: 'Stark', price: 200, discount: 16, size: 'Normal', reviews: 16, stock_out: 16, time: 30 },
-    { id: 5, name: 'Targaryen', price: 200, discount: null, reviews: null, stock_out: null, time: 30 },
-    { id: 6, name: 'Melisandre', price: 200, discount: 150, size: 'Normal', reviews: 150, stock_out: 150, time: 30 },
-    { id: 7, name: 'Clifford', price: 200, discount: 44, size: 'Normal', reviews: 44, stock_out: 44, time: 30 },
-    { id: 8, name: 'Frances', price: 200, discount: 36, size: 'Normal', reviews: 36, stock_out: 36, time: 30 },
-    { id: 9, name: 'Roxie', price: 200, discount: 65, size: 'Normal', reviews: 65, stock_out: 65, time: 30 },
-    { id: 10, name: 'Snow', price: 200, discount: 35, size: 'Normal', reviews: 35, stock_out: 35, time: 30 },
-    { id: 11, name: 'Lannister', price: 200, discount: 42, size: 'Normal', reviews: 42, stock_out: 42, time: 30 },
-    { id: 12, name: 'Lannister', price: 200, discount: 45, size: 'Normal', reviews: 45, stock_out: 45, time: 30 },
-    { id: 13, name: 'Stark', price: 200, discount: 16, size: 'Normal', reviews: 16, stock_out: 16, time: 30 },
-    { id: 14, name: 'Targaryen', price: 200, discount: null, reviews: null, stock_out: null, time: 30 },
-    { id: 15, name: 'Melisandre', price: 200, discount: 150, size: 'Normal', reviews: 150, stock_out: 150, time: 30 },
-    { id: 16, name: 'Clifford', price: 200, discount: 44, size: 'Normal', reviews: 44, stock_out: 44, time: 30 },
-    { id: 17, name: 'Frances', price: 200, discount: 36, size: 'Normal', reviews: 36, stock_out: 36, time: 30 },
-    { id: 18, name: 'Frances', price: 200, discount: 36, size: 'Normal', reviews: 36, stock_out: 36, time: 30 },
-    { id: 19, name: 'Roxie', price: 200, discount: 65, size: 'Normal', reviews: 65, stock_out: 65, time: 30 },
-    { id: 20, name: 'Roxie', price: 200, discount: 65, size: 'Normal', reviews: 65, stock_out: 65, time: 30 }
+    { id: 1, name: 'Snow', email: 200, role: 35, size: 'Normal', reviews: 35, Orders: 35, cart: 30 },
+    { id: 2, name: 'Lannister', email: 200, role: 42, size: 'Normal', reviews: 42, Orders: 42, cart: 30 },
+    { id: 3, name: 'Lannister', email: 200, role: 45, size: 'Normal', reviews: 45, Orders: 45, cart: 30 },
+    { id: 4, name: 'Stark', email: 200, role: 16, size: 'Normal', reviews: 16, Orders: 16, cart: 30 },
+    { id: 5, name: 'Targaryen', email: 200, role: null, reviews: null, Orders: null, cart: 30 },
+    { id: 6, name: 'Melisandre', email: 200, role: 150, size: 'Normal', reviews: 150, Orders: 150, cart: 30 },
+    { id: 7, name: 'Clifford', email: 200, role: 44, size: 'Normal', reviews: 44, Orders: 44, cart: 30 },
+    { id: 8, name: 'Frances', email: 200, role: 36, size: 'Normal', reviews: 36, Orders: 36, cart: 30 },
+    { id: 9, name: 'Roxie', email: 200, role: 65, size: 'Normal', reviews: 65, Orders: 65, cart: 30 },
+    { id: 10, name: 'Snow', email: 200, role: 35, size: 'Normal', reviews: 35, Orders: 35, cart: 30 },
+    { id: 11, name: 'Lannister', email: 200, role: 42, size: 'Normal', reviews: 42, Orders: 42, cart: 30 },
+    { id: 12, name: 'Lannister', email: 200, role: 45, size: 'Normal', reviews: 45, Orders: 45, cart: 30 },
+    { id: 13, name: 'Stark', email: 200, role: 16, size: 'Normal', reviews: 16, Orders: 16, cart: 30 },
+    { id: 14, name: 'Targaryen', email: 200, role: null, reviews: null, Orders: null, cart: 30 },
+    { id: 15, name: 'Melisandre', email: 200, role: 150, size: 'Normal', reviews: 150, Orders: 150, cart: 30 },
+    { id: 16, name: 'Clifford', email: 200, role: 44, size: 'Normal', reviews: 44, Orders: 44, cart: 30 },
+    { id: 17, name: 'Frances', email: 200, role: 36, size: 'Normal', reviews: 36, Orders: 36, cart: 30 },
+    { id: 18, name: 'Frances', email: 200, role: 36, size: 'Normal', reviews: 36, Orders: 36, cart: 30 },
+    { id: 19, name: 'Roxie', email: 200, role: 65, size: 'Normal', reviews: 65, Orders: 65, cart: 30 },
+    { id: 20, name: 'Roxie', email: 200, role: 65, size: 'Normal', reviews: 65, Orders: 65, cart: 30 }
 ];
-
-const DProductPsize = () => {
+const DUsers = () => {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [selected, setSelected] = React.useState([]);
@@ -278,6 +278,20 @@ const DProductPsize = () => {
 
     return (
         <Box>
+            <Grid container rowSpacing={4.5} columnSpacing={2.75}>
+                <Grid item xs={12} sx={{ mb: -2.25 }}>
+                    <Typography variant="h5">User Details</Typography>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <AnalyticEcommerce title="Total Users" count="4,42,236" extra="35,000" />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <AnalyticEcommerce title="Active Users" count="78,250" extra="8,900" />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <AnalyticEcommerce title="Worker" count="18,800" isLoss color="warning" extra="1,943" />
+                </Grid>
+            </Grid>
             <Paper sx={{ width: '100%', mb: 2, mt: 3 }}>
                 <EnhancedTableToolbar numSelected={selected.length} />
                 <TableContainer>
@@ -319,10 +333,10 @@ const DProductPsize = () => {
                                             <TableCell component="th" id={labelId} scope="row" padding="none">
                                                 {row?.name}
                                             </TableCell>
-                                            <TableCell align="right">${row?.price}</TableCell>
-                                            <TableCell align="right">{row?.discount}%</TableCell>
-                                            <TableCell align="right">{row?.time} Min</TableCell>
-                                            <TableCell align="right">{row?.stock_out}</TableCell>
+                                            <TableCell align="right">${row?.email}</TableCell>
+                                            <TableCell align="right">{row?.role}%</TableCell>
+                                            <TableCell align="right">{row?.cart} Min</TableCell>
+                                            <TableCell align="right">{row?.Orders}</TableCell>
                                             <TableCell align="right">{row?.reviews}</TableCell>
                                             <TableCell align="right">
                                                 <Stack direction="row" spacing={1}>
