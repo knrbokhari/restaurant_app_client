@@ -1,10 +1,12 @@
 // assets
-import { ChromeOutlined, QuestionOutlined } from '@ant-design/icons';
+import { SettingOutlined, QuestionOutlined, CloudSyncOutlined, SafetyCertificateOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
-    ChromeOutlined,
-    QuestionOutlined
+    SettingOutlined,
+    QuestionOutlined,
+    SafetyCertificateOutlined,
+    CloudSyncOutlined
 };
 
 // ==============================|| MENU ITEMS - SAMPLE PAGE & DOCUMENTATION ||============================== //
@@ -15,21 +17,35 @@ const support = {
     type: 'group',
     children: [
         {
-            id: 'sample-page',
-            title: 'Sample Page',
+            id: 'api',
+            title: 'API',
             type: 'item',
-            url: '/sample-page',
-            icon: icons.ChromeOutlined
+            url: '/dashboard/api',
+            icon: icons.CloudSyncOutlined
         },
         {
-            id: 'documentation',
-            title: 'Documentation',
+            id: 'permission',
+            title: 'Permission',
             type: 'item',
-            url: 'https://codedthemes.gitbook.io/mantis-react/',
-            icon: icons.QuestionOutlined,
-            external: true,
-            target: true
+            url: '/dashboard/permission',
+            icon: icons.SafetyCertificateOutlined
+        },
+        {
+            id: 'setting',
+            title: 'Setting',
+            type: 'item',
+            url: '/dashboard/setting',
+            icon: icons.SettingOutlined
         }
+        // {
+        //     id: 'documentation',
+        //     title: 'Documentation',
+        //     type: 'item',
+        //     url: 'https://codedthemes.gitbook.io/mantis-react/',
+        //     icon: icons.QuestionOutlined,
+        //     external: true,
+        //     target: true
+        // }
     ]
 };
 
