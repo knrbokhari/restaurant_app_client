@@ -125,17 +125,17 @@ const Profile = () => {
                             <Paper
                                 sx={{
                                     boxShadow: theme.customShadows.z1,
-                                    width: 290,
-                                    minWidth: 240,
-                                    maxWidth: 290,
+                                    width: 230,
+                                    minWidth: 180,
+                                    maxWidth: 220,
                                     [theme.breakpoints.down('md')]: {
-                                        maxWidth: 250
+                                        maxWidth: 200
                                     }
                                 }}
                             >
                                 <ClickAwayListener onClickAway={handleClose}>
                                     <MainCard elevation={0} border={false} content={false}>
-                                        <CardContent sx={{ px: 2.5, pt: 3 }}>
+                                        {/* <CardContent sx={{ px: 2.5, pt: 3 }}>
                                             <Grid container justifyContent="space-between" alignItems="center">
                                                 <Grid item>
                                                     <Stack direction="row" spacing={1.25} alignItems="center">
@@ -154,8 +154,11 @@ const Profile = () => {
                                                     </IconButton>
                                                 </Grid>
                                             </Grid>
-                                        </CardContent>
-                                        {open && (
+                                        </CardContent> */}
+                                        <TabPanel value={value} index={0} dir={theme.direction}>
+                                            <ProfileTab handleLogout={handleLogout} />
+                                        </TabPanel>
+                                        {/* {open && (
                                             <>
                                                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                                     <Tabs
@@ -197,7 +200,7 @@ const Profile = () => {
                                                     <SettingTab />
                                                 </TabPanel>
                                             </>
-                                        )}
+                                        )} */}
                                     </MainCard>
                                 </ClickAwayListener>
                             </Paper>
