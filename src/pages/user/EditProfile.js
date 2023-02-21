@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
     Container,
     Box,
@@ -22,59 +22,22 @@ import {
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 
-import { strengthColor, strengthIndicator } from 'utils/password-strength';
-
-// assets
-import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+import ChangePassword from 'components/ChangePassword';
 
 const EditProfile = () => {
-    const [level, setLevel] = useState();
-    const [showPassword, setShowPassword] = useState(false);
-    const handleClickShowPassword = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
-
-    const changepassword = (value) => {
-        const temp = strengthIndicator(value);
-        setLevel(strengthColor(temp));
-    };
-
-    useEffect(() => {
-        changepassword('');
-    }, []);
-
     return (
         <Container>
             <Typography variant="h1" component="h2" align="center" mt={5} mb={3}>
                 Edit Profile
             </Typography>
             <Grid container spacing={3}>
-                <Grid item xs={12} sm={5}>
-                    <Paper elevation={0} style={{ padding: '25px' }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                            <img
-                                src="https://www.ateneo.edu/sites/default/files/styles/large/public/2021-11/istockphoto-517998264-612x612.jpeg?itok=aMC1MRHJ"
-                                alt="profile_image"
-                                width="80%"
-                                height="auto"
-                                style={{ borderRadius: '50%', marginBottom: '15px' }}
-                            />
-                            <Box>
-                                <Typography variant="h4">name</Typography>
-                                <Typography variant="h4">email</Typography>
-                            </Box>
-                        </Box>
-                    </Paper>
-                </Grid>
                 <Grid item xs={12} sm={7}>
                     <Paper elevation={0} style={{ padding: '25px' }}>
                         <Typography variant="h2" mb={4}>
                             Profile Info
                         </Typography>
+                        <Divider />
+                        <Box mb={3}></Box>
                         <Formik
                             initialValues={{
                                 first_name: '',
@@ -245,7 +208,7 @@ const EditProfile = () => {
                                             <Button
                                                 disableElevation
                                                 disabled={isSubmitting}
-                                                fullWidth
+                                                // fullWidth
                                                 size="large"
                                                 type="submit"
                                                 variant="contained"
@@ -254,14 +217,14 @@ const EditProfile = () => {
                                                 Save Profile
                                             </Button>
                                         </Grid>
-                                        <Grid item xs={12}>
-                                            <Divider />
-                                        </Grid>
                                     </Grid>
                                 </form>
                             )}
                         </Formik>
                     </Paper>
+                </Grid>
+                <Grid item xs={12} sm={5}>
+                    <ChangePassword />
                 </Grid>
             </Grid>
         </Container>
