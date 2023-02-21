@@ -43,8 +43,11 @@ const Profile = () => {
                             <Grid item xs={12} md={6}>
                                 <Typography variant="h4">Role : role</Typography>
                             </Grid>
-                            <Grid item xs={12} md={6}>
+                            <Grid item xs={12}>
                                 <Typography variant="h4">Address : address</Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Typography variant="h4">Phone : phone</Typography>
                             </Grid>
                             <Grid item xs={12}>
                                 <Typography variant="h4">Total Order : order.length</Typography>

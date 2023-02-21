@@ -11,6 +11,7 @@ const Product = Loadable(lazy(() => import('pages/product/Product')));
 const CartPage = Loadable(lazy(() => import('pages/CartPage')));
 const Checkout = Loadable(lazy(() => import('pages/Checkout')));
 const Profile = Loadable(lazy(() => import('pages/user/Profile')));
+const EditProfile = Loadable(lazy(() => import('pages/user/EditProfile')));
 
 const HomeRoute = {
     path: '/',
@@ -47,6 +48,10 @@ const HomeRoute = {
         {
             path: 'profile/:id',
             element: <Profile />
+        },
+        {
+            path: 'edit-profile/:id',
+            element: <EditProfile />
         }
     ]
 };
