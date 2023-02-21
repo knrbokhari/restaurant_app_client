@@ -12,10 +12,10 @@ const HomePage = () => {
     return (
         <>
             <HomeCarousel />
-            <LocationAndTime />
+            {/* <LocationAndTime /> */}
             <Wellcome />
-            <Services />
             <OurMenu />
+            <Services />
             <BookATable />
             <HomeReview />
             <Footer />

@@ -50,7 +50,7 @@ const BookATable = () => {
                                         disablePortal
                                         id="combo-box-demo"
                                         options={person}
-                                        renderInput={(params) => <TextField fullWidth {...params} variant="filled" label="Person" />}
+                                        renderInput={(params) => <TextField fullWidth {...params} variant="standard" label="Person" />}
                                     />
                                 </Grid>
                                 <Grid item xs={12} md={6}>
@@ -61,7 +61,7 @@ const BookATable = () => {
                                             onChange={(newValue) => {
                                                 setDateValue(newValue);
                                             }}
-                                            renderInput={(params) => <TextField fullWidth variant="filled" {...params} />}
+                                            renderInput={(params) => <TextField fullWidth variant="standard" {...params} />}
                                         />
                                     </LocalizationProvider>
                                 </Grid>
@@ -74,7 +74,7 @@ const BookATable = () => {
                                                 onChange={(newValue) => {
                                                     setTimeValue(newValue);
                                                 }}
-                                                renderInput={(params) => <TextField variant="filled" {...params} />}
+                                                renderInput={(params) => <TextField variant="standard" {...params} />}
                                             />
                                         </Stack>
                                     </LocalizationProvider>
