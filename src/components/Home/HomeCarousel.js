@@ -4,7 +4,7 @@ import { Box, Grid, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
-import { activeItem } from 'store/reducers/menu';
+import { activeItem } from 'fetaures/menu/menuSlice';
 
 const contentStyle = {
     display: 'block',

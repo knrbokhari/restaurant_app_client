@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+import userReducer from 'fetaures/user/userSlice';
 import manuReducer from '../fetaures/menu/menuSlice';
 
 const store = configureStore({
     reducer: {
-        menu: manuReducer
+        menu: manuReducer,
+        user: userReducer
     }
 });
 
