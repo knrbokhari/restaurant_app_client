@@ -15,19 +15,10 @@ export const appApi = createApi({
                     'Content-Type': 'application/json'
                 }
             })
-        }),
-
-        // register
-        register: builder.mutation({
-            query: (user) => ({
-                url: 'api/v1/users/register',
-                method: 'POST',
-                body: user
-            })
         })
     })
 });
 
-export const { useLoginMutation, useRegisterMutation } = appApi;
+export const { useLoginMutation } = appApi;
 
 export default appApi;
