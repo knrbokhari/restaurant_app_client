@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ListItemButton, ListItemText, Typography, Box } from '@mui/material';
 
 // project import
-import { activeItem } from 'store/reducers/menu';
+import { activeItem } from 'fetaures/menu/menuSlice';
 
 // ==============================|| NAVIGATION - LIST ITEM ||============================== //
 
