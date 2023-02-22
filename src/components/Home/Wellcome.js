@@ -6,18 +6,6 @@ const Wellcome = () => {
         <>
             <Box>
                 <Grid container>
-                    <Grid item xs={12} md={6}>
-                        <Box
-                            style={{
-                                backgroundImage:
-                                    'url(https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)',
-                                backgroundRepeat: 'no-repeat',
-                                backgroundPosition: 'bottom',
-                                backgroundSize: 'cover',
-                                height: '450px'
-                            }}
-                        ></Box>
-                    </Grid>
                     <Grid
                         item
                         xs={12}
@@ -43,6 +31,18 @@ const Wellcome = () => {
                                 </p>
                             </Typography>
                         </Box>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Box
+                            style={{
+                                backgroundImage:
+                                    'url(https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)',
+                                backgroundRepeat: 'no-repeat',
+                                backgroundPosition: 'bottom',
+                                backgroundSize: 'cover',
+                                height: '450px'
+                            }}
+                        ></Box>
                     </Grid>
                 </Grid>
             </Box>

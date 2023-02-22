@@ -12,6 +12,7 @@ import { EditOutlined, ProfileOutlined, LogoutOutlined, UserOutlined, WalletOutl
 
 const ProfileTab = ({ handleLogout }) => {
     const theme = useTheme();
+    const user = true;
 
     const [selectedIndex, setSelectedIndex] = useState(0);
     const handleListItemClick = (event, index) => {
@@ -33,17 +34,19 @@ const ProfileTab = ({ handleLogout }) => {
                 <ListItemText primary="View Profile" />
             </ListItemButton>
 
-            <ListItemButton selected={selectedIndex === 3} onClick={(event) => handleListItemClick(event, 3)}>
+            {!user && (
+                <ListItemButton selected={selectedIndex === 3} onClick={(event) => handleListItemClick(event, 3)}>
+                    <ListItemIcon>
+                        <ProfileOutlined />
+                    </ListItemIcon>
+                    <ListItemText primary="Orders" />
+                </ListItemButton>
+            )}
+            <ListItemButton selected={selectedIndex === 4} onClick={(event) => handleListItemClick(event, 4)}>
                 <ListItemIcon>
                     <ProfileOutlined />
                 </ListItemIcon>
-                <ListItemText primary="Social Profile" />
-            </ListItemButton>
-            <ListItemButton selected={selectedIndex === 4} onClick={(event) => handleListItemClick(event, 4)}>
-                <ListItemIcon>
-                    <WalletOutlined />
-                </ListItemIcon>
-                <ListItemText primary="Billing" />
+                <ListItemText primary="My Orders" />
             </ListItemButton>
             <ListItemButton selected={selectedIndex === 2} onClick={handleLogout}>
                 <ListItemIcon>
