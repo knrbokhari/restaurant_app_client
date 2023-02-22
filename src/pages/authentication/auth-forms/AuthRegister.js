@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import axios from '../../../axios';
 
 // material-ui
@@ -22,6 +22,7 @@ import {
 // third party
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { toast } from 'react-toastify';
 
 // project import
 import FirebaseSocial from './FirebaseSocial';
@@ -39,16 +40,18 @@ const AuthRegister = () => {
     const handleClickShowpassword = () => {
         setShowpassword(!showpassword);
     };
-
+    const navigate = useNavigate();
     const handleMouseDownpassword = (event) => {
         event.preventDefault();
     };
 
     const registerUser = async (data) => {
-        // console.log(data);
         await axios
             .post('/api/v1/users/register', data)
-            .then((res) => console.log(res))
+            .then((res) => {
+                toast.success(res.data.msg);
+                navigate('/');
+            })
             .catch((e) => console.log(e));
     };
 
@@ -75,8 +78,8 @@ const AuthRegister = () => {
                 validationSchema={Yup.object().shape({
                     first_name: Yup.string().max(255).required('First Name is required'),
                     last_name: Yup.string().max(255).required('Last Name is required'),
-                    email: Yup.string().email('Must be a valid email').max(255).required('email is required'),
-                    password: Yup.string().max(255).required('password is required')
+                    email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
+                    password: Yup.string().min(6).max(255).required('Password is required')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
