@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from '../../../axios';
 
 // material-ui
@@ -10,7 +10,6 @@ import {
     FormControlLabel,
     FormHelperText,
     Grid,
-    Link,
     IconButton,
     InputAdornment,
     InputLabel,
@@ -18,35 +17,53 @@ import {
     Stack,
     Typography
 } from '@mui/material';
-import { Modal } from 'antd';
 
 // third party
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 // project import
 import FirebaseSocial from './FirebaseSocial';
 import AnimateButton from 'components/@extended/AnimateButton';
+import { useLoginMutation } from 'app/appApi/appApi';
+import { useSelector } from 'react-redux';
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
-
-// ============================|| FIREBASE - LOGIN ||============================ //
+import { Modal } from 'antd';
 
 const AuthLogin = () => {
     const [checked, setChecked] = React.useState(false);
     const [isModalOpen, setIsModalOpen] = React.useState(false);
-
     const [showPassword, setShowPassword] = React.useState(false);
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
+    const navigate = useNavigate();
+    const [login, { error, isLoading, isError, data, isSuccess }] = useLoginMutation();
+
+    useEffect(() => {
+        if (isError) {
+            toast.error(error.data.message);
+        }
+    }, [error?.data?.message, isError]);
+
+    if (isSuccess) {
+        if (data.user.role !== 'user') {
+            navigate('/');
+        }
+        navigate('/dashboard');
+    }
+
+    console.log(data);
+    if (data?.token) {
+        Cookies.set('token', data?.token, { expires: 1 });
+    }
 
     const loginUser = async (data) => {
-        await axios
-            .post('/api/v1/users/login', data)
-            .then((res) => console.log(res))
-            .catch((e) => console.log(e));
+        await login(data);
     };
 
     const forgotPassword = async (data) => {
@@ -155,6 +172,11 @@ const AuthLogin = () => {
                                     )}
                                 </Stack>
                             </Grid>
+                            {isError && (
+                                <Grid item xs={12}>
+                                    <FormHelperText error>{error.message}</FormHelperText>
+                                </Grid>
+                            )}
 
                             <Grid item xs={12} sx={{ mt: -1 }}>
                                 <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>

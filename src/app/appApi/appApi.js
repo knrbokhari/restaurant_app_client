@@ -1,18 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseURL } from '../../axios';
-
-console.log(baseURL);
+// import { baseURL } from '../../axios';
 
 export const appApi = createApi({
     reducerPath: 'appApi',
-    baseQuery: fetchBaseQuery({ baseURL }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000' }),
     endpoints: (builder) => ({
         // login
         login: builder.mutation({
             query: (user) => ({
                 url: 'api/v1/users/login',
                 method: 'POST',
-                body: user
+                body: user,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
         }),
 
