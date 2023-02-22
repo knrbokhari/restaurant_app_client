@@ -6,16 +6,20 @@ import { BrowserRouter } from 'react-router-dom';
 import 'simplebar/src/simplebar.css';
 
 // third-party
-import { Provider as ReduxProvider } from 'react-redux';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import persistStore from 'redux-persist/es/persistStore';
 
 // apex-chart
 import 'assets/third-party/apex-chart.css';
 
 // project import
 import App from './App';
-// import { store } from 'store';
 import reportWebVitals from './reportWebVitals';
 import store from 'app/store';
+
+// store to persit
+const persistedStore = persistStore(store);
 
 // ==============================|| MAIN - REACT DOM RENDER  ||============================== //
 
@@ -23,11 +27,13 @@ const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
 root.render(
     <StrictMode>
-        <ReduxProvider store={store}>
-            <BrowserRouter basename="/">
-                <App />
-            </BrowserRouter>
-        </ReduxProvider>
+        <Provider store={store}>
+            <PersistGate persistor={persistedStore}>
+                <BrowserRouter basename="/">
+                    <App />
+                </BrowserRouter>
+            </PersistGate>
+        </Provider>
     </StrictMode>
 );
 

@@ -1,6 +1,6 @@
 // types
 import { createSlice } from '@reduxjs/toolkit';
-import { appApi } from 'app/appApi/appApi';
+import appApi from 'app/appApi/appApi';
 
 // initial state
 const initialState = null;
@@ -12,7 +12,7 @@ const userSlice = createSlice({
         logout: () => initialState
     },
     extraReducers: (builder) => {
-        builder.addMatcher(appApi.endpoints.login.matchFulfilled, (_, { payload }) => payload);
+        builder.addMatcher(appApi.endpoints.login.matchFulfilled, (_, { payload }) => payload.user);
     }
 });
 
