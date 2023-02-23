@@ -72,7 +72,8 @@ const NavBarItem = ({ item }) => {
                                     color: isSelected ? iconSelectedColor : textColor,
                                     '&:hover': {
                                         color: iconSelectedColor
-                                    }
+                                    },
+                                    fontSize: '20px'
                                 }}
                             >
                                 {item.title}

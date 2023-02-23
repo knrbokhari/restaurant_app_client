@@ -68,8 +68,9 @@ const MobileSection = () => {
                 transition
                 disablePortal
                 style={{
-                    width: '100%'
+                    width: '300px'
                 }}
+                sx={{ height: '100vh' }}
                 popperOptions={{
                     modifiers: [
                         {
@@ -83,10 +84,10 @@ const MobileSection = () => {
             >
                 {({ TransitionProps }) => (
                     <Transitions type="fade" in={open} {...TransitionProps}>
-                        <Paper sx={{ boxShadow: theme.customShadows.z1 }}>
+                        <Paper sx={{ height: '100vh', position: 'relative', top: '-63px', right: '-30px' }}>
                             <ClickAwayListener onClickAway={handleClose}>
-                                <AppBar color="inherit">
-                                    <Toolbar sx={{ justifyContent: 'center' }}>
+                                <AppBar color="inherit" sx={{ height: '100vh', position: 'relative', top: '0', right: '0' }}>
+                                    <Toolbar sx={{ justifyContent: 'center', margin: '30px 0 0' }}>
                                         <NavBer />
                                     </Toolbar>
                                     {/* <Toolbar>
