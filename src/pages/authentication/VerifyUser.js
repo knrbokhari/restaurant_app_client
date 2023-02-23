@@ -40,6 +40,7 @@ const VerifyUser = () => {
                 .then((res) => {
                     console.log(res);
                     setSuccessTocken(res.data.success);
+                    setSuccess(res.data.success);
                     setMsg(res.data.msg);
                 })
                 .catch((e) => {

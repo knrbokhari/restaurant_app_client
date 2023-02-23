@@ -89,10 +89,10 @@ const MobileSection = () => {
                                     <Toolbar sx={{ justifyContent: 'center' }}>
                                         <NavBer />
                                     </Toolbar>
-                                    <Toolbar>
+                                    {/* <Toolbar>
                                         <Search />
                                         <Profile />
-                                    </Toolbar>
+                                    </Toolbar> */}
                                 </AppBar>
                             </ClickAwayListener>
                         </Paper>

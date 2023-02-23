@@ -46,13 +46,13 @@ const AuthLogin = () => {
 
     useEffect(() => {
         if (isError) {
-            toast.error(error.data.message);
+            toast.error(error?.data?.message || error.error.split(':')[1]);
         }
-    }, [error?.data?.message, isError]);
+    }, [error?.data?.message, error?.error, isError]);
 
     if (isSuccess) {
         if (data.user.role === 'user') {
-            navigate('/');
+            return navigate('/');
         }
         navigate('/dashboard');
     }
@@ -99,7 +99,7 @@ const AuthLogin = () => {
                 }}
                 validationSchema={Yup.object().shape({
                     email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-                    password: Yup.string().max(255).required('Password is required')
+                    password: Yup.string().min(6).max(255).required('Password is required')
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
