@@ -14,6 +14,7 @@ import { activeItem } from 'fetaures/menu/menuSlice';
 const NavBarItem = ({ item }) => {
     const dispatch = useDispatch();
     const menu = useSelector((state) => state.menu);
+    const user = useSelector((state) => state.user);
     const { openItem } = menu;
 
     let itemTarget = '_self';
@@ -58,23 +59,30 @@ const NavBarItem = ({ item }) => {
     const iconSelectedColor = 'green';
 
     return (
-        <ListItemButton {...listItemProps} disabled={item.disabled} onClick={() => itemHandler(item.id)}>
-            <ListItemText
-                primary={
-                    <Typography
-                        variant="h6"
-                        sx={{
-                            color: isSelected ? iconSelectedColor : textColor,
-                            '&:hover': {
-                                color: iconSelectedColor
-                            }
-                        }}
-                    >
-                        {item.title}
-                    </Typography>
-                }
-            />
-        </ListItemButton>
+        <>
+            {user && item.title === 'Login' ? (
+                <></>
+            ) : (
+                <ListItemButton {...listItemProps} disabled={item.disabled} onClick={() => itemHandler(item.id)}>
+                    <ListItemText
+                        primary={
+                            <Typography
+                                variant="h6"
+                                sx={{
+                                    color: isSelected ? iconSelectedColor : textColor,
+                                    '&:hover': {
+                                        color: iconSelectedColor
+                                    },
+                                    fontSize: '20px'
+                                }}
+                            >
+                                {item.title}
+                            </Typography>
+                        }
+                    />
+                </ListItemButton>
+            )}
+        </>
     );
 };
 

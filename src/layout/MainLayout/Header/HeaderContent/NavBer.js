@@ -29,7 +29,14 @@ const NavBer = () => {
             id: 'contact',
             title: 'Contact',
             type: 'item',
-            url: 'contact',
+            url: '/contact',
+            breadcrumbs: false
+        },
+        {
+            id: 'login',
+            title: 'Login',
+            type: 'item',
+            url: '/login',
             breadcrumbs: false
         }
     ];

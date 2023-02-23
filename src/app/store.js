@@ -18,7 +18,7 @@ const reducer = combineReducers({
 
 const persistConfig = {
     key: 'root',
-    // blackList: [appApi.reducerPath, 'menu'],
+    blackList: [appApi.reducerPath, 'menu'],
     storage
 };
 
