@@ -51,13 +51,12 @@ const AuthLogin = () => {
     }, [error?.data?.message, isError]);
 
     if (isSuccess) {
-        if (data.user.role !== 'user') {
+        if (data.user.role === 'user') {
             navigate('/');
         }
         navigate('/dashboard');
     }
 
-    console.log(data);
     if (data?.token) {
         Cookies.set('token', data?.token, { expires: 1 });
     }

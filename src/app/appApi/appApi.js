@@ -1,5 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// import { baseURL } from '../../axios';
+import Cookies from 'js-cookie';
+
+// get Bearer token from Cookie
+const token = `Bearer ${Cookies.get('token')}`;
 
 export const appApi = createApi({
     reducerPath: 'appApi',

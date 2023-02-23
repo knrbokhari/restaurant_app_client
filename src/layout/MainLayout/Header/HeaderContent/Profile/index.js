@@ -28,6 +28,9 @@ import SettingTab from './SettingTab';
 // assets
 import avatar1 from 'assets/images/users/avatar-1.png';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { useDispatch } from 'react-redux';
+import { logout } from 'fetaures/user/userSlice';
+import Cookies from 'js-cookie';
 
 // tab panel wrapper
 function TabPanel({ children, value, index, ...other }) {
@@ -55,10 +58,12 @@ function a11yProps(index) {
 
 const Profile = () => {
     const theme = useTheme();
+    // const dispatch = useDispatch();
 
-    const handleLogout = async () => {
-        // logout
-    };
+    // const handleLogout = async () => {
+    //     dispatch(logout());
+    //     Cookies.remove('token');
+    // };
 
     const anchorRef = useRef(null);
     const [open, setOpen] = useState(false);
@@ -155,12 +160,10 @@ const Profile = () => {
                                                 </Grid>
                                             </Grid>
                                         </CardContent> */}
-                                        <TabPanel value={value} index={0} dir={theme.direction}>
-                                            <ProfileTab handleLogout={handleLogout} />
-                                        </TabPanel>
-                                        {/* {open && (
+
+                                        {open && (
                                             <>
-                                                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                                {/* <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                                     <Tabs
                                                         variant="fullWidth"
                                                         value={value}
@@ -192,15 +195,18 @@ const Profile = () => {
                                                             {...a11yProps(1)}
                                                         />
                                                     </Tabs>
-                                                </Box>
-                                                <TabPanel value={value} index={0} dir={theme.direction}>
+                                                </Box> */}
+                                                {/* <TabPanel value={value} index={0} dir={theme.direction}>
                                                     <ProfileTab handleLogout={handleLogout} />
                                                 </TabPanel>
                                                 <TabPanel value={value} index={1} dir={theme.direction}>
                                                     <SettingTab />
+                                                </TabPanel> */}
+                                                <TabPanel value={value} index={0} dir={theme.direction}>
+                                                    <ProfileTab />
                                                 </TabPanel>
                                             </>
-                                        )} */}
+                                        )}
                                     </MainCard>
                                 </ClickAwayListener>
                             </Paper>

@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from 'fetaures/user/userSlice';
+import userReducer from '../fetaures/user/userSlice';
 import manuReducer from '../fetaures/menu/menuSlice';
+import appApi from './appApi/appApi';
 
 //persit our store
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
-import appApi from './appApi/appApi';
 
 //reducers
 const reducer = combineReducers({
@@ -18,15 +18,14 @@ const reducer = combineReducers({
 
 const persistConfig = {
     key: 'root',
-    storage,
-    blackList: [appApi.reducerPath, 'user']
+    // blackList: [appApi.reducerPath, 'menu'],
+    storage
 };
 
 // persist our store
 const persistedReducer = persistReducer(persistConfig, reducer);
 
 // creating the store
-
 const store = configureStore({
     reducer: persistedReducer,
     middleware: [thunk, appApi.middleware]

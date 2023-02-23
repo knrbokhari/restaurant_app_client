@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import Reacr, { useState } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -7,26 +7,39 @@ import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 
 // assets
 import { EditOutlined, ProfileOutlined, LogoutOutlined, UserOutlined, WalletOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from 'fetaures/user/userSlice';
+import Cookies from 'js-cookie';
 
 // ==============================|| HEADER PROFILE - PROFILE TAB ||============================== //
 
-const ProfileTab = ({ handleLogout }) => {
+const ProfileTab = () => {
     const theme = useTheme();
-    const user = true;
+    const user = useSelector((state) => state.user);
 
     const [selectedIndex, setSelectedIndex] = useState(0);
     const handleListItemClick = (event, index) => {
         setSelectedIndex(index);
     };
 
+    const dispatch = useDispatch();
+
+    const handleLogout = async () => {
+        dispatch(logout());
+        Cookies.remove('token');
+    };
+
     return (
         <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32, color: theme.palette.grey[500] } }}>
-            <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
-                <ListItemIcon>
-                    <EditOutlined />
-                </ListItemIcon>
-                <ListItemText primary="Edit Profile" />
-            </ListItemButton>
+            <Link to={`profile/${user?._id}`}>
+                <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
+                    <ListItemIcon>
+                        <EditOutlined />
+                    </ListItemIcon>
+                    <ListItemText primary="Edit Profile" />
+                </ListItemButton>
+            </Link>
             <ListItemButton selected={selectedIndex === 1} onClick={(event) => handleListItemClick(event, 1)}>
                 <ListItemIcon>
                     <UserOutlined />
@@ -48,7 +61,7 @@ const ProfileTab = ({ handleLogout }) => {
                 </ListItemIcon>
                 <ListItemText primary="My Orders" />
             </ListItemButton>
-            <ListItemButton selected={selectedIndex === 2} onClick={handleLogout}>
+            <ListItemButton selected={selectedIndex === 2} onClick={() => handleLogout()}>
                 <ListItemIcon>
                     <LogoutOutlined />
                 </ListItemIcon>
