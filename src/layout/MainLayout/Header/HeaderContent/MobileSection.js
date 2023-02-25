@@ -90,10 +90,6 @@ const MobileSection = () => {
                                     <Toolbar sx={{ justifyContent: 'center', margin: '30px 0 0' }}>
                                         <NavBer />
                                     </Toolbar>
-                                    {/* <Toolbar>
-                                        <Search />
-                                        <Profile />
-                                    </Toolbar> */}
                                 </AppBar>
                             </ClickAwayListener>
                         </Paper>
