@@ -58,12 +58,6 @@ function a11yProps(index) {
 
 const Profile = () => {
     const theme = useTheme();
-    // const dispatch = useDispatch();
-
-    // const handleLogout = async () => {
-    //     dispatch(logout());
-    //     Cookies.remove('token');
-    // };
 
     const anchorRef = useRef(null);
     const [open, setOpen] = useState(false);
