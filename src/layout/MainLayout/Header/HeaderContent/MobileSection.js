@@ -16,8 +16,6 @@ import NavBer from './NavBer';
 // ==============================|| HEADER CONTENT - MOBILE ||============================== //
 
 const MobileSection = () => {
-    const theme = useTheme();
-
     const [open, setOpen] = useState(false);
     const anchorRef = useRef(null);
 
