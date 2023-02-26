@@ -16,7 +16,6 @@ import { useSelector } from 'react-redux';
 const HeaderContent = () => {
     const matchesXs = useMediaQuery((theme) => theme.breakpoints.down('md'));
     const user = useSelector((state) => state.user);
-    console.log(user);
 
     return (
         <>
