@@ -20,6 +20,40 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
+    const [images, setImages] = useState([]);
+    const [imgToRemove, setImgToRemove] = useState(null);
+    // const [category, setCategory] = useState('');
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const showWidget = () => {
+        const widget = window.cloudinary.createUploadWidget(
+            {
+                cloudName: 'dbnaeem',
+                uploadPreset: 'l7km97n1'
+            },
+            (error, result) => {
+                if (!error && result.event === 'success') {
+                    setImages((prev) => [...prev, { url: result.info.url, public_id: result.info.public_id }]);
+                }
+            }
+        );
+        widget.open();
+    };
+
+    const handleRemoveImg = (imgObj) => {
+        setImgToRemove(imgObj.public_id);
+        axios
+            .delete(`/images/${imgObj.public_id}/`, {
+                headers: { Authorization: token }
+            })
+            .then((res) => {
+                setImgToRemove(null);
+                setImages((prev) => prev.filter((img) => img.public_id !== imgObj.public_id));
+            })
+            .catch((e) => console.log(e));
+    };
+
     return (
         <>
             <Box>
