@@ -14,12 +14,81 @@ import {
     InputLabel,
     OutlinedInput,
     FormHelperText,
-    Typography
+    Typography,
+    ButtonBase,
+    Fab
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import axios from '../../../axios';
+import Cookies from 'js-cookie';
+
+const ImageButton = styled(ButtonBase)(({ theme }) => ({
+    position: 'relative',
+    height: 200,
+    [theme.breakpoints.down('sm')]: {
+        width: '100% !important', // Overrides inline-style
+        height: 100
+    },
+    '&:hover, &.Mui-focusVisible': {
+        zIndex: 1,
+        '& .MuiImageBackdrop-root': {
+            opacity: 0.15
+        },
+        '& .MuiImageMarked-root': {
+            opacity: 0
+        },
+        '& .MuiTypography-root': {
+            border: '4px solid currentColor'
+        }
+    }
+}));
+
+const ImageSrc = styled('span')({
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center 40%'
+});
+
+const Image = styled('span')(({ theme }) => ({
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: theme.palette.common.white
+}));
+
+const ImageBackdrop = styled('span')(({ theme }) => ({
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: theme.palette.common.black,
+    opacity: 0.4,
+    transition: theme.transitions.create('opacity')
+}));
+
+const ImageMarked = styled('span')(({ theme }) => ({
+    height: 3,
+    width: 18,
+    backgroundColor: theme.palette.common.white,
+    position: 'absolute',
+    bottom: -2,
+    left: 'calc(50% - 9px)',
+    transition: theme.transitions.create('opacity')
+}));
 
 const AddProduct = () => {
     const [images, setImages] = useState([]);
@@ -27,6 +96,9 @@ const AddProduct = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { previewVisible, previewImage, fileList } = useState([]);
+
+    // get Bearer token from Cookie
+    const token = `Bearer ${Cookies.get('token')}`;
 
     const showWidget = () => {
         const widget = window.cloudinary.createUploadWidget(
@@ -37,6 +109,7 @@ const AddProduct = () => {
             (error, result) => {
                 if (!error && result.event === 'success') {
                     setImages((prev) => [...prev, { url: result.info.url, public_id: result.info.public_id }]);
+                    console.log(result);
                 }
             }
         );
@@ -46,12 +119,13 @@ const AddProduct = () => {
     const handleRemoveImg = (imgObj) => {
         setImgToRemove(imgObj.public_id);
         axios
-            .delete(`/images/${imgObj.public_id}/`, {
+            .delete(`/api/v1/products/images/${imgObj.public_id}/`, {
                 headers: { Authorization: token }
             })
             .then((res) => {
                 setImgToRemove(null);
                 setImages((prev) => prev.filter((img) => img.public_id !== imgObj.public_id));
+                console.log(res);
             })
             .catch((e) => console.log(e));
     };
@@ -202,7 +276,7 @@ const AddProduct = () => {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Stack spacing={1}>
-                                            <Grid container spacing={3}>
+                                            {/* <Grid container spacing={3}>
                                                 <Grid item xs={12} sm={6} md={3}>
                                                     <InputLabel htmlFor="Upload-Images" style={{ margin: '0 0 10px' }}>
                                                         Upload Images *:
@@ -227,12 +301,72 @@ const AddProduct = () => {
                                                 </Grid>
                                                 {images.map((image) => (
                                                     <Grid item xs={12} sm={6} md={3}>
-                                                        <img src={image.url} alt="" />
+                                                        <img
+                                                            src={image.url}
+                                                            alt=""
+                                                            style={{ width: '100%', height: 230, paddingTop: 30 }}
+                                                        />
                                                         {imgToRemove !== image.public_id && (
-                                                            <DeleteOutlined onClick={() => handleRemoveImg(image)} />
+                                                            <Box>
+                                                                <DeleteOutlined onClick={() => handleRemoveImg(image)} style={{}} />
+                                                            </Box>
                                                         )}
                                                     </Grid>
                                                 ))}
+                                            </Grid> */}
+                                            <Grid container spacing={3}>
+                                                <Grid item xs={12} sm={6} md={3}>
+                                                    <Paper
+                                                        sx={{
+                                                            width: '100%',
+                                                            border: '1px dashed black',
+                                                            borderRedius: '10px',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            flexDirection: 'column',
+                                                            height: 200,
+                                                            cursor: 'pointer'
+                                                        }}
+                                                        onClick={showWidget}
+                                                    >
+                                                        <PlusOutlined />
+                                                        <Typography>Upload Images</Typography>
+                                                    </Paper>
+                                                </Grid>
+                                                {images &&
+                                                    images.map((image) => (
+                                                        <Grid item xs={12} sm={6} md={3}>
+                                                            <ImageButton
+                                                                focusRipple
+                                                                key={image.title}
+                                                                style={{
+                                                                    width: '100%',
+                                                                    height: 200
+                                                                }}
+                                                            >
+                                                                <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
+                                                                <ImageBackdrop className="MuiImageBackdrop-root" />
+                                                                <Image>
+                                                                    <Typography
+                                                                        component="span"
+                                                                        variant="subtitle1"
+                                                                        color="red"
+                                                                        sx={{
+                                                                            position: 'relative',
+                                                                            p: 2,
+                                                                            pb: (theme) => `calc(${theme.spacing(1)} + 6px)`
+                                                                        }}
+                                                                    >
+                                                                        <DeleteOutlined
+                                                                            onClick={() => handleRemoveImg(image)}
+                                                                            style={{ fontSize: 25 }}
+                                                                        />
+                                                                    </Typography>
+                                                                </Image>
+                                                            </ImageButton>
+                                                        </Grid>
+                                                    ))}
                                             </Grid>
                                         </Stack>
                                     </Grid>
