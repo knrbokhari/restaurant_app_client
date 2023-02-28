@@ -16,15 +16,17 @@ import {
     FormHelperText,
     Typography
 } from '@mui/material';
+import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
     const [images, setImages] = useState([]);
     const [imgToRemove, setImgToRemove] = useState(null);
-    // const [category, setCategory] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { previewVisible, previewImage, fileList } = useState([]);
 
     const showWidget = () => {
         const widget = window.cloudinary.createUploadWidget(
@@ -62,18 +64,18 @@ const AddProduct = () => {
                     <Formik
                         initialValues={{
                             name: '',
-                            price: 0,
+                            price: '',
                             description: '',
-                            time: 0,
-                            discount: 0,
+                            time: '',
+                            discount: '',
                             image: []
                         }}
                         validationSchema={Yup.object().shape({
                             name: Yup.string().required('Name is required'),
-                            price: Yup.number().required('Price is required'),
+                            price: Yup.string().required('Price is required'),
                             description: Yup.string().required('Description is required'),
-                            time: Yup.number().required('Time is required'),
-                            discount: Yup.number().required('Discount is required'),
+                            time: Yup.string().required('Time is required'),
+                            discount: Yup.string().required('Discount is required'),
                             image: Yup.array().of(Yup.string()).required('Image is required')
                         })}
                         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
@@ -199,7 +201,43 @@ const AddProduct = () => {
                                         </Stack>
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <Button disableElevation fullWidth size="large" type="submit" variant="contained" color="primary">
+                                        <Stack spacing={1}>
+                                            <Grid container spacing={3}>
+                                                <Grid item xs={12} sm={6} md={3}>
+                                                    <InputLabel htmlFor="Upload-Images" style={{ margin: '0 0 10px' }}>
+                                                        Upload Images *:
+                                                    </InputLabel>
+                                                    <Paper
+                                                        sx={{
+                                                            width: '90%',
+                                                            border: '1px dashed black',
+                                                            borderRedius: '10px',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            flexDirection: 'column',
+                                                            height: 200,
+                                                            cursor: 'pointer'
+                                                        }}
+                                                        onClick={showWidget}
+                                                    >
+                                                        <PlusOutlined />
+                                                        <Typography>Upload Images</Typography>
+                                                    </Paper>
+                                                </Grid>
+                                                {images.map((image) => (
+                                                    <Grid item xs={12} sm={6} md={3}>
+                                                        <img src={image.url} alt="" />
+                                                        {imgToRemove !== image.public_id && (
+                                                            <DeleteOutlined onClick={() => handleRemoveImg(image)} />
+                                                        )}
+                                                    </Grid>
+                                                ))}
+                                            </Grid>
+                                        </Stack>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Button disableElevation size="large" type="submit" variant="contained" color="primary">
                                             Create
                                         </Button>
                                     </Grid>
