@@ -3,9 +3,11 @@ import React from 'react';
 import { Box, Grid, Typography, Stack, Pagination, Container } from '@mui/material';
 import ProductCard from '../components/cards/ProductCard/index';
 import Footer from 'components/Home/Footer';
+import useProducts from 'hooks/useProducts';
 
 const OurMenu = () => {
     let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
     return (
         <>
             <AllCarousel />

@@ -1,23 +1,7 @@
 import React, { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-import {
-    TextField,
-    Paper,
-    Select,
-    Box,
-    Grid,
-    Stack,
-    Button,
-    Autocomplete,
-    Chip,
-    InputLabel,
-    OutlinedInput,
-    FormHelperText,
-    Typography,
-    ButtonBase,
-    Fab
-} from '@mui/material';
+import { Paper, Box, Grid, Stack, Button, InputLabel, OutlinedInput, FormHelperText, Typography, ButtonBase } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useCreateProductMutation } from '../../../app/appApi/appApi';
@@ -160,7 +144,9 @@ const AddProduct = () => {
     return (
         <>
             <Box>
-                <Typography>Add Product</Typography>
+                <Typography align="center" variant="h3" my={5}>
+                    Add Product
+                </Typography>
                 <Paper variant="outlined" sx={{ padding: '30px' }}>
                     <Formik
                         initialValues={{
@@ -219,7 +205,7 @@ const AddProduct = () => {
                                             <InputLabel htmlFor="email-login">Price:</InputLabel>
                                             <OutlinedInput
                                                 id="email-login"
-                                                type="text"
+                                                type="number"
                                                 value={values.price}
                                                 name="price"
                                                 onBlur={handleBlur}

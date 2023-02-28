@@ -82,7 +82,7 @@ const MobileSection = () => {
             >
                 {({ TransitionProps }) => (
                     <Transitions type="fade" in={open} {...TransitionProps}>
-                        <Paper sx={{ height: '100vh', position: 'relative', top: '-63px', right: '-30px' }}>
+                        <Paper sx={{ height: '100vh', position: 'relative', top: '-58px', right: '-30px' }}>
                             <ClickAwayListener onClickAway={handleClose}>
                                 <AppBar color="inherit" sx={{ height: '100vh', position: 'relative', top: '0', right: '0' }}>
                                     <Toolbar sx={{ justifyContent: 'center', margin: '30px 0 0' }}>
