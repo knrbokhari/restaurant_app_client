@@ -20,11 +20,13 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
-
+import { useCreateProductMutation } from '../../../app/appApi/appApi';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from '../../../axios';
 import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
+import { logout } from 'fetaures/user/userSlice';
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
     position: 'relative',
@@ -91,11 +93,11 @@ const ImageMarked = styled('span')(({ theme }) => ({
 }));
 
 const AddProduct = () => {
+    const [createProduct, { isError, error, isLoading, isSuccess }] = useCreateProductMutation();
     const [images, setImages] = useState([]);
     const [imgToRemove, setImgToRemove] = useState(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { previewVisible, previewImage, fileList } = useState([]);
 
     // get Bearer token from Cookie
     const token = `Bearer ${Cookies.get('token')}`;
@@ -130,6 +132,31 @@ const AddProduct = () => {
             .catch((e) => console.log(e));
     };
 
+    const handleCreateProduct = (data) => {
+        const { name, description, price, time, discount, images } = data;
+        createProduct({
+            name,
+            description,
+            price: Number(price).toFixed(2),
+            time: Number(time).toFixed(2),
+            discount: discount(time).toFixed(2),
+            images
+        }).then((res) => {
+            console.log(res);
+            if (res.status === 403 || res.status === 401) {
+                dispatch(logout());
+                navigate('/login');
+                Cookies.remove('token');
+            }
+            if (res.data.success > 0) {
+                setTimeout(() => {
+                    navigate('/');
+                    toast.success('Product Created');
+                }, 1500);
+            }
+        });
+    };
+
     return (
         <>
             <Box>
@@ -142,21 +169,20 @@ const AddProduct = () => {
                             description: '',
                             time: '',
                             discount: '',
-                            image: []
+                            images: images
                         }}
                         validationSchema={Yup.object().shape({
                             name: Yup.string().required('Name is required'),
                             price: Yup.string().required('Price is required'),
                             description: Yup.string().required('Description is required'),
                             time: Yup.string().required('Time is required'),
-                            discount: Yup.string().required('Discount is required'),
-                            image: Yup.array().of(Yup.string()).required('Image is required')
+                            discount: Yup.string().required('Discount is required')
                         })}
                         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                             try {
                                 setStatus({ success: false });
                                 setSubmitting(false);
-                                console.log(values);
+                                handleCreateProduct(values);
                             } catch (err) {
                                 setStatus({ success: false });
                                 setErrors({ submit: err.message });
@@ -276,44 +302,6 @@ const AddProduct = () => {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Stack spacing={1}>
-                                            {/* <Grid container spacing={3}>
-                                                <Grid item xs={12} sm={6} md={3}>
-                                                    <InputLabel htmlFor="Upload-Images" style={{ margin: '0 0 10px' }}>
-                                                        Upload Images *:
-                                                    </InputLabel>
-                                                    <Paper
-                                                        sx={{
-                                                            width: '90%',
-                                                            border: '1px dashed black',
-                                                            borderRedius: '10px',
-                                                            display: 'flex',
-                                                            alignItems: 'center',
-                                                            justifyContent: 'center',
-                                                            flexDirection: 'column',
-                                                            height: 200,
-                                                            cursor: 'pointer'
-                                                        }}
-                                                        onClick={showWidget}
-                                                    >
-                                                        <PlusOutlined />
-                                                        <Typography>Upload Images</Typography>
-                                                    </Paper>
-                                                </Grid>
-                                                {images.map((image) => (
-                                                    <Grid item xs={12} sm={6} md={3}>
-                                                        <img
-                                                            src={image.url}
-                                                            alt=""
-                                                            style={{ width: '100%', height: 230, paddingTop: 30 }}
-                                                        />
-                                                        {imgToRemove !== image.public_id && (
-                                                            <Box>
-                                                                <DeleteOutlined onClick={() => handleRemoveImg(image)} style={{}} />
-                                                            </Box>
-                                                        )}
-                                                    </Grid>
-                                                ))}
-                                            </Grid> */}
                                             <Grid container spacing={3}>
                                                 <Grid item xs={12} sm={6} md={3}>
                                                     <Paper
@@ -339,7 +327,7 @@ const AddProduct = () => {
                                                         <Grid item xs={12} sm={6} md={3}>
                                                             <ImageButton
                                                                 focusRipple
-                                                                key={image.title}
+                                                                key={image?.title}
                                                                 style={{
                                                                     width: '100%',
                                                                     height: 200

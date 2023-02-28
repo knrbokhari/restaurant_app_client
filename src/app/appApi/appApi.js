@@ -18,10 +18,20 @@ export const appApi = createApi({
                     'Content-Type': 'application/json'
                 }
             })
+        }),
+
+        // creating product
+        createProduct: builder.mutation({
+            query: (product) => ({
+                url: 'api/v1/products/create',
+                body: product,
+                method: 'POST',
+                headers: { Authorization: token }
+            })
         })
     })
 });
 
-export const { useLoginMutation } = appApi;
+export const { useLoginMutation, useCreateProductMutation } = appApi;
 
 export default appApi;
