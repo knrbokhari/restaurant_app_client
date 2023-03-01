@@ -61,7 +61,13 @@ const CartItems = () => {
                                 </Box>
                             </Box>
                             <IconButton>
-                                <CloseOutlined />
+                                <CloseOutlined
+                                    onClick={() =>
+                                        removeFromCart({
+                                            cartId: item?.cartId?._id
+                                        })
+                                    }
+                                />
                             </IconButton>
                         </Box>
                     </Paper>
