@@ -48,7 +48,13 @@ const CartItems = () => {
                                         </IconButton>
                                         <Typography mx={1}>1</Typography>
                                         <IconButton>
-                                            <PlusOutlined />
+                                            <PlusOutlined
+                                                onClick={() =>
+                                                    increaseCart({
+                                                        cartId: item?.cartId?._id
+                                                    })
+                                                }
+                                            />
                                         </IconButton>
                                     </Box>
                                     <Typography>$200.00</Typography>
