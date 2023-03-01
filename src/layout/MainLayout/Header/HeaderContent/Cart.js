@@ -27,6 +27,7 @@ import Transitions from 'components/@extended/Transitions';
 // assets
 import { ShoppingCartOutlined, CloseOutlined, GiftOutlined, MessageOutlined, SettingOutlined } from '@ant-design/icons';
 import DrawerContent from 'layout/MainLayout/Drawer/DrawerContent/index';
+import { Link } from 'react-router-dom';
 
 // sx styles
 const avatarSX = {
@@ -169,15 +170,17 @@ const Cart = () => {
                                             </Box>
                                             <Divider />
                                             <Typography sx={{ padding: '10px 20px', textAlign: 'center' }}>Total Price: $120.00</Typography>
-                                            <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }}>
-                                                <ListItemText
-                                                    primary={
-                                                        <Typography variant="h6" color="primary">
-                                                            View Cart
-                                                        </Typography>
-                                                    }
-                                                />
-                                            </ListItemButton>
+                                            <Link to="/cart" style={{ textDecoration: 'none' }} onClick={handleToggle}>
+                                                <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }}>
+                                                    <ListItemText
+                                                        primary={
+                                                            <Typography variant="h6" color="primary">
+                                                                View Cart
+                                                            </Typography>
+                                                        }
+                                                    />
+                                                </ListItemButton>
+                                            </Link>
                                             <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }}>
                                                 <ListItemText
                                                     primary={

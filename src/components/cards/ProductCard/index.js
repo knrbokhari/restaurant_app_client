@@ -24,8 +24,9 @@ const index = ({ product }) => {
     const [addToCart, { isSuccess, error }] = useAddToCartMutation();
 
     if (isSuccess) {
-        toast.success(`${product.name} add to cart`);
+        toast.success(`${product.name} is added to your cart`);
     }
+
     return (
         <>
             <Card sx={{ width: '100%', position: 'relative' }}>
