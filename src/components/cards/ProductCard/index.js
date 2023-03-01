@@ -5,6 +5,9 @@ import { styled } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import { CustomButtonTwo } from 'components/Home/HomeCarousel';
 import { Link } from 'react-router-dom';
+import { useAddToCartMutation } from 'app/appApi/appApi';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const textStyle = {
     wordWrap: 'normal',
@@ -16,7 +19,14 @@ const textStyle = {
     whiteSpace: 'nowrap'
 };
 
-const index = ({ url }) => {
+const index = ({ product }) => {
+    const user = useSelector((state) => state.user);
+    const [addToCart, { isSuccess, error }] = useAddToCartMutation();
+
+    if (isSuccess) {
+        toast.success(`${product.name} is added to your cart`);
+    }
+
     return (
         <>
             <Card sx={{ width: '100%', position: 'relative' }}>
@@ -75,7 +85,18 @@ const index = ({ url }) => {
                     <Typography sx={{ fontWeight: 700 }} mb={2}>
                         Price: <del>$200</del> <span> $150</span>
                     </Typography>
-                    <CustomButtonTwo sx={{ fontSize: '16px', width: '100%' }}>Add to Cart</CustomButtonTwo>
+                    <CustomButtonTwo
+                        sx={{ fontSize: '16px', width: '100%' }}
+                        onClick={() => {
+                            addToCart({
+                                clientId: user?._id,
+                                productId: product?._id,
+                                price: product?.price
+                            });
+                        }}
+                    >
+                        Add to Cart
+                    </CustomButtonTwo>
                 </CardContent>
             </Card>
         </>
