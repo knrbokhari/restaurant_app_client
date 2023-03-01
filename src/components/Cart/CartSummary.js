@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Grid, Typography, Divider, Paper, Container, Button } from '@mui/material';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { Link } from 'react-router-dom';
 
 const CartSummary = () => {
     return (
@@ -25,9 +26,12 @@ const CartSummary = () => {
                 </Box>
                 <Divider />
                 <ReCAPTCHA sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" />
-                <Button fullWidth sx={{ margin: '10px 0', fontSize: '17px' }}>
-                    Checkout Now
-                </Button>
+                <Link to="/checkout" style={{ textDecoration: 'none' }}>
+                    <Button fullWidth sx={{ margin: '10px 0', fontSize: '17px' }}>
+                        Checkout Now
+                    </Button>
+                </Link>
+
                 <Typography sx={{ fontSize: '16px' }}>
                     This site is Protected reCAPTCHA and the Google <span>Privacy Policy</span> and <span>Tarms Of Service</span> apply.
                 </Typography>

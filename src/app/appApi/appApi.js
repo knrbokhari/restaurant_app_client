@@ -42,7 +42,7 @@ export const appApi = createApi({
         // remove from cart
         removeFromCart: builder.mutation({
             query: (body) => ({
-                url: `api/v1/cart/remove-from-cart${body.cartId}`,
+                url: `api/v1/cart/remove-from-cart/${body.cartId}`,
                 headers: { Authorization: token },
                 method: 'PUT'
             })
@@ -51,7 +51,7 @@ export const appApi = createApi({
         // increase cart
         increaseCartProduct: builder.mutation({
             query: (body) => ({
-                url: `api/v1/cart/increase-cart${body.cartId}`,
+                url: `api/v1/cart/increase-cart/${body.cartId}`,
                 headers: { Authorization: token },
                 method: 'PUT'
             })
@@ -60,7 +60,7 @@ export const appApi = createApi({
         // decrease cart
         decreaseCartProduct: builder.mutation({
             query: (body) => ({
-                url: `api/v1/cart/decrease-cart${body.cartId}`,
+                url: `api/v1/cart/decrease-cart/${body.cartId}`,
                 headers: { Authorization: token },
                 method: 'PUT'
             })
