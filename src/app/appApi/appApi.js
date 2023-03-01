@@ -64,6 +64,16 @@ export const appApi = createApi({
                 headers: { Authorization: token },
                 method: 'PUT'
             })
+        }),
+
+        // create order
+        createOrder: builder.mutation({
+            query: (body) => ({
+                url: 'api/v1/orders/create',
+                headers: { Authorization: token },
+                method: 'POST',
+                body
+            })
         })
     })
 });
@@ -74,7 +84,8 @@ export const {
     useAddToCartMutation,
     useRemoveFromCartMutation,
     useIncreaseCartProductMutation,
-    useDecreaseCartProductMutation
+    useDecreaseCartProductMutation,
+    useCreateOrderMutation
 } = appApi;
 
 export default appApi;
