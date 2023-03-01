@@ -28,10 +28,20 @@ export const appApi = createApi({
                 method: 'POST',
                 headers: { Authorization: token }
             })
+        }),
+
+        // add to cart
+        addToCart: builder.mutation({
+            query: (cartInfo) => ({
+                url: 'api/v1/cart/add-to-cart',
+                headers: { Authorization: token },
+                body: cartInfo,
+                method: 'POST'
+            })
         })
     })
 });
 
-export const { useLoginMutation, useCreateProductMutation } = appApi;
+export const { useLoginMutation, useCreateProductMutation, useAddToCartMutation } = appApi;
 
 export default appApi;
