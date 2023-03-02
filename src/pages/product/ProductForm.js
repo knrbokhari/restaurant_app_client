@@ -15,8 +15,12 @@ import {
     TextField,
     Container
 } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { useAddToCartMutation } from 'app/appApi/appApi';
 
-const ProductForm = () => {
+const ProductForm = ({ product }) => {
+    const user = useSelector((state) => state.user);
+    const [addToCart, { isSuccess, error }] = useAddToCartMutation();
     const [size, setSize] = useState(0);
     const [boiledEgg, setBoiledEgg] = useState(0);
     const [sweetCorn, setSweetCorn] = useState(0);
@@ -26,6 +30,10 @@ const ProductForm = () => {
     const [beetroot, setBeetroot] = useState(0);
 
     const setOptions = () => {};
+
+    if (isSuccess) {
+        toast.success(`${product.name} is added to your cart`);
+    }
 
     return (
         <Box>
@@ -91,7 +99,18 @@ const ProductForm = () => {
             <FormGroup>
                 <TextField type="number" defaultValue="1" sx={{ width: '70px' }} />
             </FormGroup>
-            <Button>Add to cart</Button>
+            <Button
+                onClick={() => {
+                    addToCart({
+                        userId: user._id,
+                        productId: product._id,
+                        price: price,
+                        other: data
+                    });
+                }}
+            >
+                Add to cart
+            </Button>
         </Box>
     );
 };

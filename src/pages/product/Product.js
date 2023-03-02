@@ -44,7 +44,7 @@ const Product = () => {
                             quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
                             ultricies mi vitae est. Mauris placerat eleifend leo.
                         </Typography>
-                        <ProductForm />
+                        <ProductForm product="product" />
                     </Grid>
                 </Grid>
                 <DescriptionAndReview />

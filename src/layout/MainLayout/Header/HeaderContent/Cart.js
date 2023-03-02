@@ -181,15 +181,17 @@ const Cart = () => {
                                                     />
                                                 </ListItemButton>
                                             </Link>
-                                            <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }}>
-                                                <ListItemText
-                                                    primary={
-                                                        <Typography variant="h6" color="primary">
-                                                            Checkout
-                                                        </Typography>
-                                                    }
-                                                />
-                                            </ListItemButton>
+                                            <Link to="/checkout" style={{ textDecoration: 'none' }} onClick={handleToggle}>
+                                                <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }}>
+                                                    <ListItemText
+                                                        primary={
+                                                            <Typography variant="h6" color="primary">
+                                                                Checkout
+                                                            </Typography>
+                                                        }
+                                                    />
+                                                </ListItemButton>
+                                            </Link>
                                         </List>
                                     </MainCard>
                                 </ClickAwayListener>
